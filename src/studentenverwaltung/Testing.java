@@ -6,7 +6,18 @@ import studentenverwaltung.verwaltung.*;
 
 public class Testing {
 	public static void main(String[] args){
-		System.out.println("HashTableTest:" + hashTableTest());
+		//System.out.println("HashTableTest:" + hashTableTest());
+		System.out.println("Datetest:" + dateTest());
+	}
+
+	public static boolean dateTest(){
+		Date myBday = new Date(1991, 6, 2);
+		System.out.println(myBday);
+		System.out.println(Date.getToday());
+
+		System.out.println(Date.getToday().getYearsSince(myBday));
+		
+		return true;
 	}
 
 	public static boolean hashTableTest(){

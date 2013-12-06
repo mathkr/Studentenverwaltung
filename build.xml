@@ -11,10 +11,19 @@
 
 	<target name="compile" depends="clean">
 		<mkdir dir="${classes.dir}" />
-		<javac srcdir="${src.dir}" destdir="${classes.dir}" />
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false" />
 	</target>
 
 	<target name="run" depends="compile">
+		<java classname="${main-class}" fork="true">
+			<classpath>
+				 <pathelement location="${classes.dir}"/>
+				 <pathelement path="${java.class.path}"/>
+			</classpath>
+		</java>
+	</target>
+
+	<target name="onlyrun"><!-- run without cleaning and building first -->
 		<java classname="${main-class}" fork="true">
 			<classpath>
 				 <pathelement location="${classes.dir}"/>
