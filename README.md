@@ -1,5 +1,11 @@
 Build and compile with:
-	**$** ant compile
+
+```
+ant compile
+```
 
 or just:
-	**$** ant
+
+```
+ant
+```
