@@ -1,7 +1,7 @@
 build and run with:
 
 ```
-ant compile
+ant run
 ```
 
 or just:
