@@ -1,0 +1,27 @@
+<project name="Studentenverwaltung" basedir="." default="main">
+	<property name="src.dir"	value="src" />
+	<property name="build.dir"	value="build" />
+	<property name="classes.dir"	value="${build.dir}/classes" />
+
+	<property name="main-class"	value="studentenverwaltung.Testing" />
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="compile" depends="clean">
+		<mkdir dir="${classes.dir}" />
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" />
+	</target>
+
+	<target name="run" depends="compile">
+		<java classname="${main-class}" fork="true">
+			<classpath>
+				 <pathelement location="${classes.dir}"/>
+				 <pathelement path="${java.class.path}"/>
+			</classpath>
+		</java>
+	</target>
+
+	<target name="main" depends="run" />
+</project>
