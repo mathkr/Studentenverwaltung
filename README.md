@@ -1,4 +1,4 @@
-Build and compile with:
+build and run with:
 
 ```
 ant compile
