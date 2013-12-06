@@ -1,1 +1,5 @@
-Übung für Programmieren I + II
+Build and compile with:
+	**$** ant compile
+
+or just:
+	**$** ant
