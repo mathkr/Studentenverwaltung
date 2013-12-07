@@ -16,6 +16,8 @@ public class Testing {
 		System.out.println(Date.getToday());
 
 		System.out.println(Date.getToday().getYearsSince(myBday));
+
+		System.out.println(Date.getToday() + " compareTo " + myBday + " = " + Date.getToday().compareTo(myBday));
 		
 		return true;
 	}
