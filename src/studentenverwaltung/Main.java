@@ -50,6 +50,9 @@ public final class Main {
 					Student delete = verwaltung.deleteByMatrikel(Integer.parseInt(s));
 					if(delete == null){
 						out.println("No student found with matrikel " + s);
+					} else {
+						out.print("Deleted: ");
+						out.println(delete);
 					}
 					break;
 				case "6":
