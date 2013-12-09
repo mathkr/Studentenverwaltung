@@ -6,8 +6,8 @@ import studentenverwaltung.verwaltung.*;
 
 public class Testing {
 	public static void main(String[] args){
-		//System.out.println("HashTableTest:" + hashTableTest());
-		System.out.println("Datetest:" + dateTest());
+		System.out.println("HashTableTest:" + hashTableTest());
+		//System.out.println("Datetest:" + dateTest());
 	}
 
 	public static boolean dateTest(){

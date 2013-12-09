@@ -3,6 +3,8 @@ package studentenverwaltung.util;
 import java.util.Calendar;
 
 public class Date {
+	private static final int[] DAYS_IN_EACH_MONTH = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
 	private int year;
 	private int month;
 	private int day;
@@ -69,6 +71,16 @@ public class Date {
 
 	public static Date getToday(){
 		return today;
+	}
+
+	public static Date getRandomDate(int startYear, int endYear){
+		if(startYear >= endYear) endYear = startYear;
+
+		int year = startYear + (int)(Math.random() * (endYear - startYear) + 1);
+		int month = (int)(Math.random() * 12 + 1);
+		int day = (int)(Math.random() * DAYS_IN_EACH_MONTH[month] + 1);
+
+		return new Date(year, month, day);
 	}
 
 	public int getYearsSince(Date date){
