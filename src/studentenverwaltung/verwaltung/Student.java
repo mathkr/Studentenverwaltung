@@ -50,7 +50,7 @@ public class Student {
 		return name;
 	}
 
-	public Date getDate(){
+	public Date getBirthday(){
 		return geburtstag;
 	}
 
@@ -58,7 +58,17 @@ public class Student {
 		return Date.getToday().getYearsSince(geburtstag);
 	}
 
+	public int getMatrikelNummer(){
+		return matrikelNummer;
+	}
+
 	public Studiengang getStudiengang(){
 		return studiengang;
+	}
+
+	@Override
+	public String toString(){
+		return getMatrikelNummer() + " : " + getName() + " : " + getBirthday() + " : " + getStudiengang().name + " : " + getAge() +
+			" years : " + getAnzahlPruefungenBestanden() + "/32";
 	}
 }
