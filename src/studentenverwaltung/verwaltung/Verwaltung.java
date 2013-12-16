@@ -79,6 +79,17 @@ public final class Verwaltung {
 		out.println(getYoungestStudent(0, 0));
 	}
 
+	public ArrayList<Student> getStudentenWithPruefCount(int pruefungen){
+		return getStudentenWithPruefCount(new ArrayList<Studenten>(), studenten.getSize() - 1, pruefungen);
+	}
+
+	public ArrayList<Student> getStudentenWithPruefCount(ArrayList<Studenten> bestanden, int n, pruefungen){
+		if(n < 0) return bestanden;
+		
+		if(studenten.get(n).hasPassedPruefungen(pruefungen)) bestanden.add(studenten.get(n));
+		getStudentenWithPruefCount(bestanden, n - 1, pruefungen);
+	}
+
 	public void printPruefungenHisto(){
 		int[] werte = new int[33];
 		int max = 0;

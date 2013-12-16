@@ -19,6 +19,14 @@ public class Student {
 		this.matrikelNummer = nextMatrikelnummer++;
 	}
 
+	public Student(Student student){
+		this.name = student.getName();
+		this.geburtstag = student.getBirthday();
+		this.studiengang = student.getStudiengang();
+		this.bestandenePruefungen = student.getPruefungen();
+		this.matrikelNummer = student.getMatrikelNummer();
+	}
+
 	public void setPruefungBestanden(int index, boolean bestanden) throws IndexOutOfBoundsException {
 		if(index < 0 || index > 31)
 			throw new IndexOutOfBoundsException("Index: " + index + ", size: 31");
@@ -44,6 +52,14 @@ public class Student {
 		}
 
 		return res;
+	}
+
+	public int getPruefungen(){
+		return bestandenePruefungen;
+	}
+
+	public boolean hasPassedPruefungen(int pruefungen){
+		return (bestandenePruefungen & pruefungen) == pruefungen;
 	}
 
 	public Name getName(){
