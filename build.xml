@@ -9,7 +9,12 @@
 		<delete dir="${build.dir}" />
 	</target>
 
-	<target name="build" depends="clean">
+	<target name="rebuild" depends="clean">
+		<mkdir dir="${classes.dir}" />
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false" />
+	</target>
+
+	<target name="build">
 		<mkdir dir="${classes.dir}" />
 		<javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false" />
 	</target>
@@ -23,7 +28,7 @@
 		</java>
 	</target>
 
-	<target name="justrun"><!-- run without cleaning and building first -->
+	<target name="justrun">
 		<java classname="${main-class}" fork="true">
 			<classpath>
 				 <pathelement location="${classes.dir}"/>
