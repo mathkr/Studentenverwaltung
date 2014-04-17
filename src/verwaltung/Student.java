@@ -1,6 +1,6 @@
-package studentenverwaltung.verwaltung;
+package verwaltung;
 
-import studentenverwaltung.util.*;
+import util.*;
 
 public class Student {
 	private static int nextMatrikelnummer = 10000;

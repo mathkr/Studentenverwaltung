@@ -1,4 +1,9 @@
+package util.sort;
+
 import java.util.concurrent.*;
+
+import util.IncrementLatch;
+import util.structures.SimpleCollection;
 
 public class ConcurrentQuicksort<T extends Comparable<T>> implements Runnable {
 	private SimpleCollection<T> col;

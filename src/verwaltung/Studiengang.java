@@ -1,4 +1,4 @@
-package studentenverwaltung.verwaltung;
+package verwaltung;
 
 public enum Studiengang {
 	Anlagenbetriebstechnik(1, "Anlagenbetriebstechnik"),

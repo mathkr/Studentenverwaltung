@@ -1,3 +1,5 @@
+package util.structures;
+
 public interface SimpleCollection<T> {
 	public int size();
 	public void push_back(T arg);

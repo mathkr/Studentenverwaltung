@@ -1,8 +1,9 @@
-package studentenverwaltung.util;
+package util;
 
-import java.util.Random;
+import verwaltung.*;
+
+import java.util.ArrayList;
 import java.io.*;
-import studentenverwaltung.verwaltung.*;
 
 public class NameGenerator {
 	private ArrayList<String> firstNames;
@@ -16,8 +17,8 @@ public class NameGenerator {
 	}
 
 	public Name getRandomName(){
-		int firstNameIndex = (int)(Math.random() * firstNames.getSize());
-		int lastNameIndex = (int)(Math.random() * lastNames.getSize());
+		int firstNameIndex = (int)(Math.random() * firstNames.size());
+		int lastNameIndex = (int)(Math.random() * lastNames.size());
 		return new Name(firstNames.get(firstNameIndex), lastNames.get(lastNameIndex));
 	}
 

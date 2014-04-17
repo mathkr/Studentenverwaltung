@@ -1,6 +1,8 @@
+package util.structures;
+
 public class List<T> implements SimpleCollection<T> {
-	private ListElement head;
-	private ListElement tail;
+	private ListElement<T> head;
+	private ListElement<T> tail;
 
 	private int size;
 	
@@ -51,7 +53,7 @@ public class List<T> implements SimpleCollection<T> {
 	public void set(int i, T arg){
 		checkBounds(i);
 
-		ListElement e = getListElement(i);
+		ListElement<T> e = getListElement(i);
 
 		e.setObject(arg);
 	}
@@ -59,7 +61,7 @@ public class List<T> implements SimpleCollection<T> {
 	public void delete(int i){
 		checkBounds(i);
 
-		ListElement e = getListElement(i);
+		ListElement<T> e = getListElement(i);
 
 		if (e == head){
 			if(e.getNext() != null){
@@ -114,8 +116,8 @@ public class List<T> implements SimpleCollection<T> {
 		}
 	}
 
-	private ListElement getListElement(int i){
-		ListElement res = null;
+	private ListElement<T> getListElement(int i){
+		ListElement<T> res = null;
 
 		if(i < size / 2){
 			res = head;
@@ -138,12 +140,12 @@ public class List<T> implements SimpleCollection<T> {
 		}
 	}
 
-	class ListElement<T> {
+	private class ListElement<K> {
 		private Object obj;
-		private ListElement prev;
-		private ListElement next;
+		private ListElement<K> prev;
+		private ListElement<K> next;
 
-		public ListElement(T obj, ListElement prev, ListElement next){
+		public ListElement(K obj, ListElement<K> prev, ListElement<K> next){
 			this.obj = obj;
 			this.prev = prev;
 			this.next = next;
@@ -152,13 +154,14 @@ public class List<T> implements SimpleCollection<T> {
 			if(next != null) next.setPrev(this);
 		}
 
-		public ListElement getNext(){ return next; }
-		public ListElement getPrev(){ return prev; }
+		public ListElement<K> getNext(){ return next; }
+		public ListElement<K> getPrev(){ return prev; }
 
-		public void setNext(ListElement newNext){ next = newNext; }
-		public void setPrev(ListElement newPrev){ prev = newPrev; }
+		public void setNext(ListElement<K> newNext){ next = newNext; }
+		public void setPrev(ListElement<K> newPrev){ prev = newPrev; }
 
-		public T getObject(){ return (T) obj; }
-		public void setObject(T obj){ this.obj = obj; }
+		@SuppressWarnings("unchecked")
+		public K getObject(){ return (K) obj; }
+		public void setObject(K obj){ this.obj = obj; }
 	}
 }

@@ -1,4 +1,8 @@
+package util.sort;
+
 import java.util.ArrayList;
+
+import util.structures.SimpleCollection;
 
 public class SortTest {
 	private TestableSort testableSort;
@@ -14,7 +18,7 @@ public class SortTest {
 
 		this.testableSort = testableSort;
 		this.name = name;
-		this.times = new ArrayList();
+		this.times = new ArrayList<Long>();
 		this.col = col;
 	}
 

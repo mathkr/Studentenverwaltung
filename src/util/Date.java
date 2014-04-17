@@ -1,4 +1,4 @@
-package studentenverwaltung.util;
+package util;
 
 import java.util.Calendar;
 

@@ -1,3 +1,5 @@
+package util.structures;
+
 public class Vector<T> implements SimpleCollection<T> {
 	private static final int DEFAULT_CAPACITY = 10;
 
@@ -64,6 +66,7 @@ public class Vector<T> implements SimpleCollection<T> {
 		elements[size++] = arg;
 	}
 
+	@SuppressWarnings("unchecked")
 	public T get(int i){
 		if(i >= size || i < 0){
 			throw new IndexOutOfBoundsException("Index: " + i + ", Size: " + size);

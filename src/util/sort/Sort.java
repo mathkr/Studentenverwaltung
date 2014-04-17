@@ -1,3 +1,8 @@
+package util.sort;
+
+import util.structures.SimpleCollection;
+import util.structures.Vector;
+
 public class Sort {
 	public static <T extends Comparable<T>> boolean isSorted(SimpleCollection<T> col){
 		for(int i = 0; i < col.size() - 1; ++i){
@@ -135,6 +140,7 @@ public class Sort {
 	/*****************************/
 
 	public static <T extends Comparable<T>>  void mergesort(SimpleCollection<T> col){
+		@SuppressWarnings("unchecked")
 		T[] aux = (T[]) new Comparable[col.size()];
 
 		mergesort(col, aux, 0, col.size() - 1);

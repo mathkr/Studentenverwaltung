@@ -1,7 +1,9 @@
-package studentenverwaltung.verwaltung;
+package verwaltung;
 
-import studentenverwaltung.util.*;
+import util.*;
+
 import java.io.*;
+import java.util.ArrayList;
 
 public final class Verwaltung {
 	private static final String FIRST_NAME_FILE = "resources/first_names";
@@ -34,28 +36,28 @@ public final class Verwaltung {
 	}
 
 	public void removeStudent(int index){
-		if(index >= 0 && index < studenten.getSize()){
+		if(index >= 0 && index < studenten.size()){
 			studenten.remove(index);
 		}
 	}
 
 	public float getAverageAge(){
 		float avg = 0;
-		for(int i = 0; i < studenten.getSize(); ++i){
+		for(int i = 0; i < studenten.size(); ++i){
 			avg += studenten.get(i).getAge();
 		}
-		return avg / (float)studenten.getSize();
+		return avg / (float)studenten.size();
 	}
 
 	public void printAll(){
-		for(int i = 0; i < studenten.getSize(); ++i){
+		for(int i = 0; i < studenten.size(); ++i){
 			out.println(studenten.get(i));
 		}
 	}
 
 	public Student deleteByMatrikel(int matrikel){
 		Student delete = null;
-		for(int i = 0; i < studenten.getSize(); ++i){
+		for(int i = 0; i < studenten.size(); ++i){
 			if(studenten.get(i).getMatrikelNummer() == matrikel){
 				delete = studenten.get(i);
 				studenten.remove(i);
@@ -66,7 +68,7 @@ public final class Verwaltung {
 	}
 
 	public void printStudent(int index){
-		if(index >= 0 && index < studenten.getSize()){
+		if(index >= 0 && index < studenten.size()){
 			out.println(studenten.get(index));
 		}
 	}
@@ -79,21 +81,10 @@ public final class Verwaltung {
 		out.println(getYoungestStudent(0, 0));
 	}
 
-	public ArrayList<Student> getStudentenWithPruefCount(int pruefungen){
-		return getStudentenWithPruefCount(new ArrayList<Studenten>(), studenten.getSize() - 1, pruefungen);
-	}
-
-	public ArrayList<Student> getStudentenWithPruefCount(ArrayList<Studenten> bestanden, int n, pruefungen){
-		if(n < 0) return bestanden;
-		
-		if(studenten.get(n).hasPassedPruefungen(pruefungen)) bestanden.add(studenten.get(n));
-		getStudentenWithPruefCount(bestanden, n - 1, pruefungen);
-	}
-
 	public void printPruefungenHisto(){
 		int[] werte = new int[33];
 		int max = 0;
-		for(int i = 0; i < studenten.getSize(); ++i){
+		for(int i = 0; i < studenten.size(); ++i){
 			werte[studenten.get(i).getAnzahlPruefungenBestanden()]++;
 		}
 		for(int i = 0; i < werte.length; ++i){
@@ -119,7 +110,7 @@ public final class Verwaltung {
 
 	// rekursiv den aeltesten studenten bestimmen
 	private Student getOldestStudent(int max, int index){
-		if(index == studenten.getSize()) return studenten.get(max);
+		if(index == studenten.size()) return studenten.get(max);
 
 		if(studenten.get(index).getBirthday().compareTo(studenten.get(max).getBirthday()) < 0){
 			return getOldestStudent(index, index + 1);
@@ -130,7 +121,7 @@ public final class Verwaltung {
 
 	// rekursiv den juengsten studenten bestimmen
 	private Student getYoungestStudent(int min, int index){
-		if(index == studenten.getSize()) return studenten.get(min);
+		if(index == studenten.size()) return studenten.get(min);
 
 		if(studenten.get(index).getBirthday().compareTo(studenten.get(min).getBirthday()) > 0){
 			return getYoungestStudent(index, index + 1);
