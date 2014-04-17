@@ -9,12 +9,12 @@
 		<delete dir="${build.dir}" />
 	</target>
 
-	<target name="compile" depends="clean">
+	<target name="build" depends="clean">
 		<mkdir dir="${classes.dir}" />
 		<javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false" />
 	</target>
 
-	<target name="run" depends="compile">
+	<target name="run" depends="build">
 		<java classname="${main-class}" fork="true">
 			<classpath>
 				 <pathelement location="${classes.dir}"/>
@@ -23,7 +23,7 @@
 		</java>
 	</target>
 
-	<target name="onlyrun"><!-- run without cleaning and building first -->
+	<target name="justrun"><!-- run without cleaning and building first -->
 		<java classname="${main-class}" fork="true">
 			<classpath>
 				 <pathelement location="${classes.dir}"/>
