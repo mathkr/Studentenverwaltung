@@ -8,7 +8,7 @@ import util.structures.Vector;
 public class TestManager {
 	private TestableSort quick = new TestableSort() {
 		public void sort(SimpleCollection<Integer> col){
-			Sort.quicksort(col);
+			Quicksort.sort(col);
 		}
 
 		@Override
@@ -17,7 +17,7 @@ public class TestManager {
 
 	private TestableSort concurrentQuick = new TestableSort() {
 		public void sort(SimpleCollection<Integer> col){
-			Sort.quicksort_parallel(col);
+			ConcurrentQuicksort.sort(col);
 		}
 
 		@Override
@@ -26,7 +26,7 @@ public class TestManager {
 
 	private TestableSort merge = new TestableSort() {
 		public void sort(SimpleCollection<Integer> col){
-			Sort.mergesort(col);
+			Mergesort.sort(col);
 		}
 
 		@Override
@@ -35,7 +35,7 @@ public class TestManager {
 
 	private TestableSort shell = new TestableSort() {
 		public void sort(SimpleCollection<Integer> col){
-			Sort.shellsort(col);
+			Shellsort.sort(col);
 		}
 
 		@Override

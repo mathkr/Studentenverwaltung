@@ -25,6 +25,22 @@ public class ConcurrentQuicksort<T extends Comparable<T>> implements Runnable {
 	}
 
 	public static <T extends Comparable<T>> void sort(SimpleCollection<T> col){
+		shuffle(col);
+		swap(col, max(col), col.size() - 1);
+		beginSort(col);
+	}
+
+	private static <T extends Comparable<T>> int max(SimpleCollection<T> col){
+		int max = 0;
+
+		for(int i = 1; i < col.size(); ++i){
+			if(col.get(i).compareTo(col.get(max)) > 0) max = i;
+		}
+
+		return max;
+	}
+
+	private static <T extends Comparable<T>> void beginSort(SimpleCollection<T> col){
 		IncrementLatch allDone = new IncrementLatch(1);
 
 		new ConcurrentQuicksort<T>(col, 0, col.size() - 1, col.size() / MAX_THREADS, allDone).quicksort(0, col.size() - 1, true);
@@ -33,6 +49,14 @@ public class ConcurrentQuicksort<T extends Comparable<T>> implements Runnable {
 			allDone.await();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+	}
+
+	private static <T> void shuffle(SimpleCollection<T> col){
+		// fisher & yates shuffling algorithm
+		for(int i = col.size() - 1; i > 0; --i){
+			int j = (int)(Math.random() * (i + 1));
+			swap(col, j, i);
 		}
 	}
 
