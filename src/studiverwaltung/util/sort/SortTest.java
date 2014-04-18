@@ -1,8 +1,8 @@
-package util.sort;
+package studiverwaltung.util.sort;
 
 import java.util.ArrayList;
 
-import util.structures.SimpleCollection;
+import studiverwaltung.util.structures.SimpleCollection;
 
 public class SortTest {
 	private TestableSort testableSort;

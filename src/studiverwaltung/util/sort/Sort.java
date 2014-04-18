@@ -1,7 +1,7 @@
-package util.sort;
+package studiverwaltung.util.sort;
 
-import util.structures.SimpleCollection;
-import util.structures.Vector;
+import studiverwaltung.util.structures.SimpleCollection;
+import studiverwaltung.util.structures.Vector;
 
 public class Sort {
 	public static <T extends Comparable<T>> boolean isSorted(SimpleCollection<T> col){

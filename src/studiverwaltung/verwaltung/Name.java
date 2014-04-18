@@ -1,4 +1,4 @@
-package verwaltung;
+package studiverwaltung.verwaltung;
 
 public class Name {
 	private char[] firstName;

@@ -1,4 +1,4 @@
-package util.structures;
+package studiverwaltung.util.structures;
 
 public class Vector<T> implements SimpleCollection<T> {
 	private static final int DEFAULT_CAPACITY = 10;

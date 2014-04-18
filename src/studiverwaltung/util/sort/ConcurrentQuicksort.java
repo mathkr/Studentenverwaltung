@@ -1,9 +1,9 @@
-package util.sort;
+package studiverwaltung.util.sort;
 
 import java.util.concurrent.*;
 
-import util.IncrementLatch;
-import util.structures.SimpleCollection;
+import studiverwaltung.util.IncrementLatch;
+import studiverwaltung.util.structures.SimpleCollection;
 
 public class ConcurrentQuicksort<T extends Comparable<T>> implements Runnable {
 	private SimpleCollection<T> col;

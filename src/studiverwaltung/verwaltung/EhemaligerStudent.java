@@ -1,6 +1,6 @@
-package verwaltung;
+package studiverwaltung.verwaltung;
 
-import util.Date;
+import studiverwaltung.util.Date;
 
 public class EhemaligerStudent extends Student {
 	private Date exmatrikuliert;

@@ -1,7 +1,10 @@
-package util;
+package studiverwaltung.util;
 
 import java.util.Calendar;
 
+/**
+ * This Class represents a Date consisting of year, month and day.
+ */
 public class Date {
 	private static final int[] DAYS_IN_EACH_MONTH = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 

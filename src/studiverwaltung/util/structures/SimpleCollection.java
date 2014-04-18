@@ -1,4 +1,4 @@
-package util.structures;
+package studiverwaltung.util.structures;
 
 public interface SimpleCollection<T> {
 	public int size();

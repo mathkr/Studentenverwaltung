@@ -1,4 +1,4 @@
-package util;
+package studiverwaltung.util;
 
 public class IncrementLatch {
 	private int countDown;

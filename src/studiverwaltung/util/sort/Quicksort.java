@@ -1,6 +1,6 @@
-package util.sort;
+package studiverwaltung.util.sort;
 
-import util.structures.SimpleCollection;
+import studiverwaltung.util.structures.SimpleCollection;
 
 public class Quicksort {
 	public static <T extends Comparable<T>> void sort(SimpleCollection<T> col){

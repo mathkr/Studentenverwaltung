@@ -1,6 +1,6 @@
-package util;
+package studiverwaltung.util;
 
-import verwaltung.*;
+import studiverwaltung.verwaltung.*;
 
 import java.util.ArrayList;
 import java.io.*;

@@ -1,9 +1,9 @@
-package util.sort;
+package studiverwaltung.util.sort;
 
 import java.util.ArrayList;
 
-import util.structures.SimpleCollection;
-import util.structures.Vector;
+import studiverwaltung.util.structures.SimpleCollection;
+import studiverwaltung.util.structures.Vector;
 
 public class TestManager {
 	private TestableSort quick = new TestableSort() {

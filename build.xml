@@ -2,6 +2,7 @@
 	<property name="src.dir"	value="src" />
 	<property name="build.dir"	value="build" />
 	<property name="classes.dir"	value="${build.dir}/classes" />
+	<property name="docs.dir"	value="docs" />
 
 	<property name="main-class"	value="Main" />
 
@@ -35,6 +36,14 @@
 				 <pathelement path="${java.class.path}"/>
 			</classpath>
 		</java>
+	</target>
+
+	<target name="document">
+		<javadoc sourcepath="${src.dir}" destdir="${docs.dir}" />
+	</target>
+
+	<target name="cleandocs">
+		<delete dir="${docs.dir}" />
 	</target>
 
 	<target name="main" depends="run" />
