@@ -4,7 +4,7 @@
 	<property name="classes.dir"	value="${build.dir}/classes" />
 	<property name="docs.dir"	value="docs" />
 
-	<property name="main-class"	value="Main" />
+	<property name="main-class"	value="studiverwaltung.Main" />
 
 	<target name="clean">
 		<delete dir="${build.dir}" />
