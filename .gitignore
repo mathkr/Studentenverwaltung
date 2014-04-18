@@ -1,6 +1,3 @@
 build/
 *.class
-*.swp
-*.swo
-tags
 /bin
