@@ -5,11 +5,11 @@ import studiverwaltung.util.structures.SimpleCollection;
 public class Quicksort {
 	public static <T extends Comparable<T>> void sort(SimpleCollection<T> col){
 		shuffle(col);
-		swap(col, max(col), col.size() - 1);
+		swap(col, maxIndex(col), col.size() - 1);
 		quicksort(col, 0, col.size() - 1);
 	}
 
-	private static <T extends Comparable<T>> int max(SimpleCollection<T> col){
+	,rivate static <T extends Comparable<T>> int maxIndex(SimpleCollection<T> col){
 		int max = 0;
 
 		for(int i = 1; i < col.size(); ++i){

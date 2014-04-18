@@ -26,11 +26,11 @@ public class ConcurrentQuicksort<T extends Comparable<T>> implements Runnable {
 
 	public static <T extends Comparable<T>> void sort(SimpleCollection<T> col){
 		shuffle(col);
-		swap(col, max(col), col.size() - 1);
+		swap(col, maxIndex(col), col.size() - 1);
 		beginSort(col);
 	}
 
-	private static <T extends Comparable<T>> int max(SimpleCollection<T> col){
+	private static <T extends Comparable<T>> int maxIndex(SimpleCollection<T> col){
 		int max = 0;
 
 		for(int i = 1; i < col.size(); ++i){
