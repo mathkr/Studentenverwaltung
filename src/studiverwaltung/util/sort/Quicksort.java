@@ -2,9 +2,6 @@ package studiverwaltung.util.sort;
 
 import studiverwaltung.util.structures.SimpleCollection;
 
-/**
- * hallo liebe Gemeinde!
- */
 public class Quicksort {
 	public static <T extends Comparable<T>> void sort(
 	    SimpleCollection<T> col)
