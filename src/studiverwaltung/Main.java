@@ -1,32 +1,19 @@
 package studiverwaltung;
 
+import studiverwaltung.util.structures.Vector;
 import studiverwaltung.util.structures.BinarySearchTree;
+import studiverwaltung.util.structures.SimpleCollection;
+import studiverwaltung.util.sort.Heapsort;
 
 public class Main {
  	public static void main(String[] args) {
-		BinarySearchTree<Integer, Integer> bst =
-		    new BinarySearchTree<Integer, Integer>();
-
-		Integer[] values = new Integer[1000];
-		for (int i = 0; i < values.length; ++i) {
-			values[i] = (int)(Math.random() * 500);
+		Vector<Integer> v = new Vector<Integer>();
+		for (int i = 0; i < 10; ++i) {
+			v.push_back((int)(Math.random() * 20));
 		}
-
-		System.out.println("isValid = " + isValid(bst, values));
-
-		System.out.println("before put: get(100) = " + bst.get(100));
-		bst.put(100,666);
-		System.out.println("get(100) = " + bst.get(100));
-		bst.delete(100);
-		System.out.println("after delete: get(100) = " + bst.get(100));
-
-		for (int i = 0; i < values.length; ++i) {
-			Integer val = bst.get(values[i]);
-			if (val == null || !val.equals(values[i])) {
-				System.out.println(values[i] +
-				    " is set incorrectly");
-			}
-		}
+		printCollection(v);
+		Heapsort.sort(v);
+		printCollection(v);
 	}
 
 	private static <T extends Comparable<T>> boolean isValid(
@@ -44,6 +31,13 @@ public class Main {
 		}
 
 		return bst.getMax().equals(max) && bst.getMin().equals(min);
+	}
+
+	private static void printCollection(SimpleCollection col) {
+		for (int i = 0; i < col.size(); ++i) {
+			System.out.print(col.get(i) + "\t");
+		}
+		System.out.println();
 	}
 
 	private static void printArray(int[] a) {
