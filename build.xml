@@ -17,7 +17,7 @@
 
 	<target name="build">
 		<mkdir dir="${classes.dir}" />
-		<javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false" />
+		<javac srcdir="${src.dir}" debug="true" destdir="${classes.dir}" includeantruntime="false" />
 	</target>
 
 	<target name="run" depends="build">

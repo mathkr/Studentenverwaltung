@@ -9,19 +9,24 @@ public class Main {
 
 		Integer[] values = new Integer[1000];
 		for (int i = 0; i < values.length; ++i) {
-			values[i] = (int)(Math.random() * 50000);
+			values[i] = (int)(Math.random() * 500);
 		}
 
 		System.out.println("isValid = " + isValid(bst, values));
-		System.out.println("get(5) = " + bst.get(5));
 
-		System.out.println("max = " + bst.getMax());
-		bst.deleteMax();
-		System.out.println("newmax = " + bst.getMax());
+		System.out.println("before put: get(100) = " + bst.get(100));
+		bst.put(100,666);
+		System.out.println("get(100) = " + bst.get(100));
+		bst.delete(100);
+		System.out.println("after delete: get(100) = " + bst.get(100));
 
-		System.out.println("min = " + bst.getMin());
-		bst.deleteMin();
-		System.out.println("newmin = " + bst.getMin());
+		for (int i = 0; i < values.length; ++i) {
+			Integer val = bst.get(values[i]);
+			if (val == null || !val.equals(values[i])) {
+				System.out.println(values[i] +
+				    " is set incorrectly");
+			}
+		}
 	}
 
 	private static <T extends Comparable<T>> boolean isValid(

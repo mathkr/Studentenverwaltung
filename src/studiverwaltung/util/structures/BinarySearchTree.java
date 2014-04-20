@@ -83,27 +83,15 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 		return getMin(node.left);
 	}
 
-	public void deleteMax() {
-		if (root != null) deleteMax(root);
-	}
-
-	public void deleteMin() {
-		if (root != null) deleteMin(root);
-	}
-
 	private Node<K, T> deleteMax(Node<K, T> node) {
-		if (node == null) return null;
-
-		node.right = deleteMax(node.right);
 		if (node.right == null) return node.left;
+		node.right = deleteMax(node.right);
 		return node;
 	}
 
 	private Node<K, T> deleteMin(Node<K, T> node) {
-		if (node == null) return null;
-
-		node.left = deleteMin(node.left);
 		if (node.left == null) return node.right;
+		node.left = deleteMin(node.left);
 		return node;
 	}
 
@@ -121,18 +109,27 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 		getValues(node.right, values);
 	}
 
-	/* public T delete(K key) { */
-	/* 	return delete(root, key); */
-	/* } */
+	public T delete(K key) {
+		return delete(root, key).value;
+	}
 
-	/* private T delete(Node<K, T> node, K key) { */
-	/* 	if (node == null) return null; */
-        /*  */
-	/* 	int compare = key.compareTo(node.key); */
-        /*  */
-	/* 	if (compare < 0) return delete(node.left, key); */
-	/* 	if (compare > 0) return delete(node.right, key); */
-        /*  */
-	/* 	return node.value; */
-	/* } */
+	private Node<K, T> delete(Node<K, T> node, K key) {
+		if (node == null) return null;
+
+		int compare = key.compareTo(node.key);
+		if 	(compare < 0) node.left  = delete(node.left, key);
+		else if (compare > 0) node.right = delete(node.right, key);
+		else {
+			--size;
+			if (node.right == null) return node.left;
+			if (node.left == null) return node.right;
+
+			Node<K, T> old = node;
+			node = getMin(old.right);
+			node.right = deleteMin(old.right);
+			node.left = old.left;
+			return node;
+		}
+		return node;
+	}
 }
