@@ -1,42 +1,37 @@
 package studiverwaltung.verwaltung;
 
-public class Name {
-	private char[] firstName;
-	private char[] lastName;
+public class Name implements Comparable<Name> {
+	private String firstName;
+	private String lastName;
 
-	public Name(char[] firstName, char[] lastName){
+	public Name(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
 
-	public Name(String firstName, String lastName){
-		this(firstName.toCharArray(), lastName.toCharArray());
+	public String getFullName() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(firstName);
+		sb.append(" ");
+		sb.append(lastName);
+		return sb.toString();
 	}
 
-	public char[] getFullName(){
-		char[] res = new char[firstName.length + 1 + lastName.length];
-
-		for(int i = 0; i < firstName.length; ++i)
-			res[i] = firstName[i];
-
-		res[firstName.length] = ' ';
-
-		for(int i = 0; i < lastName.length; ++i)
-			res[firstName.length + 1 + i] = lastName[i];
-
-		return res;
+	public String getFirstName() {
+		return new String(firstName);
 	}
 
-	public char[] getFirstName(){
-		return firstName.clone();
+	public String getLastName() {
+		return new String(lastName);
 	}
 
-	public char[] getLastName(){
-		return lastName.clone();
+	@Override
+	public int compareTo(Name other) {
+		return lastName.compareTo(other.lastName);
 	}
 
 	@Override
 	public String toString(){
-		return new String(getFullName());
+		return getFullName();
 	}
 }

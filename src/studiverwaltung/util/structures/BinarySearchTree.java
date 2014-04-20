@@ -1,5 +1,7 @@
 package studiverwaltung.util.structures;
 
+import java.util.ArrayList;
+
 /**
  * A standard binary search tree.
  */
@@ -103,6 +105,20 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 		node.left = deleteMin(node.left);
 		if (node.left == null) return node.right;
 		return node;
+	}
+
+	public ArrayList<T> getValues() {
+		ArrayList<T> values = new ArrayList<T>(size);
+		getValues(root, values);
+		return values;
+	}
+
+	private void getValues(Node<K, T> node, ArrayList<T> values) {
+		if (node == null) return;
+
+		values.add(node.value);
+		getValues(node.left, values);
+		getValues(node.right, values);
 	}
 
 	/* public T delete(K key) { */

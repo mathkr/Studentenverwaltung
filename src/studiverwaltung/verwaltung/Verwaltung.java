@@ -1,6 +1,7 @@
 package studiverwaltung.verwaltung;
 
 import studiverwaltung.util.*;
+import studiverwaltung.util.structures.BinarySearchTree;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,58 +10,71 @@ public final class Verwaltung {
 	private static final String FIRST_NAME_FILE = "resources/first_names";
 	private static final String LAST_NAME_FILE = "resources/last_names";
 
-	private ArrayList<Student> studenten;
+	private BinarySearchTree<Name, Student> studenten;
+	private ArrayList<Student> cachedValues;
 	private PrintStream out;
 
-	private NameGenerator nameGen;
-
-	public Verwaltung(PrintStream out){
+	public Verwaltung(PrintStream out) {
 		this(out, 0);
 	}
 
-	public Verwaltung(PrintStream out, int initRandomStudents){
+	public Verwaltung(PrintStream out, int initRandomStudents) {
 		this.out = out;
-		this.studenten = new ArrayList<Student>();
+		this.studenten = new BinarySearchTree<Name, Student>();
 
-		for(int i = 0; i < initRandomStudents; ++i){
-			Student newStudent = getRandomStudent();
-			if(newStudent != null)
-				addStudent(newStudent);
-			else
-				return;
+		NameGenerator nameGen = null;
+
+		try {
+			nameGen = new NameGenerator(new File(FIRST_NAME_FILE),
+			    new File(LAST_NAME_FILE));
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
 		}
+
+		for (int i = 0; i < initRandomStudents; ++i) {
+			addStudent(getRandomStudent(nameGen));
+		}
+	}
+
+	public Student getStudent(int i) {
+		if (cachedValues == null) cachedValues = studenten.getValues();
+
+		return cachedValues.get(i);
 	}
 
 	public void addStudent(Student student){
-		studenten.add(student);
+		studenten.put(student.getName(), student);
+		cachedValues = null;
 	}
 
-	public void removeStudent(int index){
-		if(index >= 0 && index < studenten.size()){
-			studenten.remove(index);
-		}
+	public void removeStudent(Student student){
+		/*
+		 *  todo: implement delete
+		 */
+		cachedValues = null;
 	}
 
 	public float getAverageAge(){
 		float avg = 0;
 		for(int i = 0; i < studenten.size(); ++i){
-			avg += studenten.get(i).getAge();
+			avg += getStudent(i).getAge();
 		}
 		return avg / (float)studenten.size();
 	}
 
 	public void printAll(){
 		for(int i = 0; i < studenten.size(); ++i){
-			out.println(studenten.get(i));
+			out.println(getStudent(i));
 		}
 	}
 
 	public Student deleteByMatrikel(int matrikel){
 		Student delete = null;
 		for(int i = 0; i < studenten.size(); ++i){
-			if(studenten.get(i).getMatrikelNummer() == matrikel){
-				delete = studenten.get(i);
-				studenten.remove(i);
+			if(getStudent(i).getMatrikelNummer() == matrikel){
+				delete = getStudent(i);
+				removeStudent(delete);
 				return delete;
 			}
 		}
@@ -69,79 +83,15 @@ public final class Verwaltung {
 
 	public void printStudent(int index){
 		if(index >= 0 && index < studenten.size()){
-			out.println(studenten.get(index));
+			out.println(getStudent(index));
 		}
 	}
 
-	public void printOldestStudent(){
-		out.println(getOldestStudent(0, 0));
-	}
-
-	public void printYoungestStudent(){
-		out.println(getYoungestStudent(0, 0));
-	}
-
-	public void printPruefungenHisto(){
-		int[] werte = new int[33];
-		int max = 0;
-		for(int i = 0; i < studenten.size(); ++i){
-			werte[studenten.get(i).getAnzahlPruefungenBestanden()]++;
-		}
-		for(int i = 0; i < werte.length; ++i){
-			max = werte[i] > max ? werte[i] : max;
-		}
-
-		for(int i = 0; i < werte.length; ++i){
-			out.format("%3d | ", i);
-			for(int j = 0; j < werte[i]; ++j){
-				out.print("#");
-			}
-			out.println();
-		}
-
-		out.print("     ");
-		for(int i = 0; i < max + 3; ++i)
-			out.print("-");
-			
-		out.println();
-	}
-
-	/***********************/
-
-	// rekursiv den aeltesten studenten bestimmen
-	private Student getOldestStudent(int max, int index){
-		if(index == studenten.size()) return studenten.get(max);
-
-		if(studenten.get(index).getBirthday().compareTo(studenten.get(max).getBirthday()) < 0){
-			return getOldestStudent(index, index + 1);
-		} else {
-			return getOldestStudent(max, index + 1);
-		}
-	}
-
-	// rekursiv den juengsten studenten bestimmen
-	private Student getYoungestStudent(int min, int index){
-		if(index == studenten.size()) return studenten.get(min);
-
-		if(studenten.get(index).getBirthday().compareTo(studenten.get(min).getBirthday()) > 0){
-			return getYoungestStudent(index, index + 1);
-		} else {
-			return getYoungestStudent(min, index + 1);
-		}
-	}
-
-	private Student getRandomStudent(){
-		if(nameGen == null)
-			try {
-				nameGen = new NameGenerator(new File(FIRST_NAME_FILE), new File(LAST_NAME_FILE));
-			} catch(IOException e){
-				e.printStackTrace();
-				return null;
-			}
-
+	private Student getRandomStudent(NameGenerator nameGen) {
 		Name name = nameGen.getRandomName();
 		Date geburtstag = Date.getRandomDate(1970, 1995);
-		Studiengang studiengang = Studiengang.values()[(int)(Math.random() * Studiengang.values().length)];
+		Studiengang studiengang = Studiengang.values()[
+		    (int)(Math.random() * Studiengang.values().length)];
 
 		Student newStudent = new Student(name, geburtstag, studiengang);
 

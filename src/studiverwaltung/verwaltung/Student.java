@@ -40,7 +40,7 @@ public class Student {
 	public boolean getPruefungBestanden(int index) throws IndexOutOfBoundsException {
 		if(index < 0 || index > 31)
 			throw new IndexOutOfBoundsException("Index: " + index + ", size: 31");
-		
+
 		return ((bestandenePruefungen >> index) & 1) == 1;
 	}
 
