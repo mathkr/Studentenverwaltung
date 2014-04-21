@@ -4,16 +4,14 @@ import studiverwaltung.util.structures.Vector;
 import studiverwaltung.util.structures.BinarySearchTree;
 import studiverwaltung.util.structures.SimpleCollection;
 import studiverwaltung.util.sort.Heapsort;
+import studiverwaltung.util.sort.TestManager;
 
 public class Main {
  	public static void main(String[] args) {
-		Vector<Integer> v = new Vector<Integer>();
-		for (int i = 0; i < 10; ++i) {
-			v.push_back((int)(Math.random() * 20));
-		}
-		printCollection(v);
-		Heapsort.sort(v);
-		printCollection(v);
+		TestManager tm = TestManager.getTestManager();
+		tm.runTests(5);
+		tm.printTests();
+		System.exit(0);
 	}
 
 	private static <T extends Comparable<T>> boolean isValid(
