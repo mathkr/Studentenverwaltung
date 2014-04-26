@@ -9,7 +9,7 @@ import studiverwaltung.util.sort.TestManager;
 public class Main {
  	public static void main(String[] args) {
 		TestManager tm = TestManager.getTestManager();
-		tm.runTests(1);
+		tm.runTests(5);
 		tm.printTests();
 		System.exit(0);
 	}

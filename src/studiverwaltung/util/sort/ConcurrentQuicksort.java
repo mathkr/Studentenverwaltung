@@ -32,8 +32,11 @@ public class ConcurrentQuicksort<T extends Comparable<T>> implements Runnable {
 	public static <T extends Comparable<T>> void sort(
 	    SimpleCollection<T> col)
 	{
-		shuffle(col);
-		swap(col, maxIndex(col), col.size() - 1);
+		int max = maxIndex(col);
+		T tmp = col.get(max);
+		col.set(max, col.get(col.size() - 1));
+		col.set(col.size() - 1, tmp);
+
 		beginSort(col);
 	}
 
@@ -65,14 +68,6 @@ public class ConcurrentQuicksort<T extends Comparable<T>> implements Runnable {
 		}
 	}
 
-	private static <T> void shuffle(SimpleCollection<T> col) {
-		/* fisher & yates shuffling algorithm */
-		for (int i = col.size() - 1; i > 0; --i) {
-			int j = (int)(Math.random() * (i + 1));
-			swap(col, j, i);
-		}
-	}
-
 	@Override
 	public void run() {
 		quicksort(left, right, true);
@@ -87,7 +82,10 @@ public class ConcurrentQuicksort<T extends Comparable<T>> implements Runnable {
 
 		/* find pivot and position it on the left */
 		int mid = left + (right - left) / 2;
-		swap(col, left, median_of_three(col, left, mid, right));
+		int pivot = median_of_three(col, left, mid, right);
+		T tmp = col.get(left);
+		col.set(left, col.get(pivot));
+		col.set(pivot, tmp);
 
 		/* partition */
 		mid = partition(col, left, left, right + 1);
@@ -111,16 +109,23 @@ public class ConcurrentQuicksort<T extends Comparable<T>> implements Runnable {
 	    SimpleCollection<T> col, int pivot, int left, int right)
 	{
 		T piv = col.get(pivot);
+		T tmp = null;
 
 		while(true){
 			while(col.get(++left ).compareTo(piv) < 0);
 			while(col.get(--right).compareTo(piv) > 0);
 
 			if (left >= right) break;
-			swap(col, left, right);
+
+			tmp = col.get(left);
+			col.set(left, col.get(right));
+			col.set(right, tmp);
 		}
 
-		swap(col, pivot, right);
+		tmp = col.get(pivot);
+		col.set(pivot, col.get(right));
+		col.set(right, tmp);
+
 		return right;
 	}
 
@@ -146,12 +151,6 @@ public class ConcurrentQuicksort<T extends Comparable<T>> implements Runnable {
 		} else {
 			return bIndex;
 		}
-	}
-
-	private static <T> void swap(SimpleCollection<T> col, int a, int b) {
-		T tmp = col.get(a);
-		col.set(a, col.get(b));
-		col.set(b, tmp);
 	}
 }
 
