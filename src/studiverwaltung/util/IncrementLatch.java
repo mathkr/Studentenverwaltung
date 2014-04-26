@@ -11,11 +11,11 @@ public class IncrementLatch {
 		this(0);
 	}
 
-	public void increment(){
+	synchronized public void increment(){
 		++countDown;
 	}
 
-	public void decrement(){
+	synchronized public void decrement(){
 		--countDown;
 	}
 
