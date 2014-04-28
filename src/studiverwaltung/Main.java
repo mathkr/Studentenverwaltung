@@ -1,17 +1,34 @@
 package studiverwaltung;
 
-import studiverwaltung.util.structures.Vector;
+import studiverwaltung.util.structures.HashTable;
 import studiverwaltung.util.structures.BinarySearchTree;
 import studiverwaltung.util.structures.SimpleCollection;
-import studiverwaltung.util.sort.Heapsort;
-import studiverwaltung.util.sort.TestManager;
 
 public class Main {
  	public static void main(String[] args) {
-		TestManager tm = TestManager.getTestManager();
-		tm.runTests(5);
-		tm.printTests();
-		System.exit(0);
+		int[] keys = new int[5];
+		HashTable ht = new HashTable();
+		int k = 31;
+		for (int i = 0; i < keys.length; ++i) {
+			keys[i] = k;
+			k += 31;
+			ht.put(keys[i], i);
+			System.out.printf("key=%d, value=%d%n", keys[i], i);
+			System.out.println(ht + "\n");
+		}
+
+		ht.put(5, 10);
+
+		System.out.println("------------\n");
+
+		for (int i = 0; i < keys.length; ++i) {
+			System.out.printf("key: %d, value: %d%n",
+			    keys[i], ht.get(keys[i]));
+			System.out.println(ht + "\n");
+			ht.remove(keys[i]);
+		}
+
+		System.out.println(ht);
 	}
 
 	private static <T extends Comparable<T>> boolean isValid(
