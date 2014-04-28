@@ -1,3 +1,6 @@
 build/
 *.class
 /bin
+*.hi
+*.o
+tools/primegen
