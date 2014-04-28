@@ -1,7 +1,7 @@
 package studiverwaltung.util.structures;
 
 public class HashTable<K, T> {
-	private static int[] primeSizes = {31, 61, 127, 251, 509, 1021, 2039,
+	private final static int[] PRIMESIZES = {31, 61, 127, 251, 509, 1021, 2039,
 	    4093, 8191, 16381, 32749, 65521, 131071, 262139, 524287, 1048573,
 	    2097143, 4194301, 8388593, 16777213, 33554393, 67108859, 134217689,
 	    268435399, 536870909, 1073741789, 2147483647};
@@ -13,7 +13,7 @@ public class HashTable<K, T> {
 
 	public HashTable(Hasher<K> hasher) {
 		nodesSizeIndex = 0;
-		nodes = new Node[primeSizes[nodesSizeIndex]];
+		nodes = new Node[PRIMESIZES[nodesSizeIndex]];
 		filled = 0;
 		this.hasher = hasher;
 	}
@@ -91,7 +91,7 @@ public class HashTable<K, T> {
 	}
 
 	private void enlarge() {
-		Node<K, T>[] newNodes = new Node[primeSizes[++nodesSizeIndex]];
+		Node<K, T>[] newNodes = new Node[PRIMESIZES[++nodesSizeIndex]];
 		for (int i = 0; i < nodes.length; ++i) {
 			if (nodes[i] != null) {
 				int index = hash(nodes[i].key) %
