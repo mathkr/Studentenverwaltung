@@ -78,18 +78,6 @@ public class HashTable<K, T> {
 		return res;
 	}
 
-	 /* debug method */
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < nodes.length; ++i) {
-			sb.append(nodes[i] == null ? "nu" :
-				String.format("%2d", nodes[i].val));
-			sb.append(' ');
-		}
-		return sb.toString();
-	}
-
 	private void enlarge() {
 		Node<K, T>[] newNodes = new Node[PRIMESIZES[++nodesSizeIndex]];
 		for (int i = 0; i < nodes.length; ++i) {
