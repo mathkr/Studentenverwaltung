@@ -1,7 +1,7 @@
 import Data.Numbers.Primes
 
 main :: IO()
-main = putStr . unlines . map show . getPrimes $ 80
+main = putStr . unlines . map show . getPrimes $ 31
 
 getPrimes :: (Integral a) => a -> [a]
 getPrimes max = [smallerPrime x | x <- powersOfTwo max]
