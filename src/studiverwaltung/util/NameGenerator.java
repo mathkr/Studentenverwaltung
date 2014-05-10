@@ -9,7 +9,9 @@ public class NameGenerator {
 	private ArrayList<String> firstNames;
 	private ArrayList<String> lastNames;
 
-	public NameGenerator (File firstNamesFile, File lastNamesFile) throws IOException {
+	public NameGenerator (File firstNamesFile, File lastNamesFile)
+	    throws IOException
+	{
 		this.firstNames = new ArrayList<String>();
 		this.lastNames = new ArrayList<String>();
 
@@ -19,12 +21,18 @@ public class NameGenerator {
 	public Name getRandomName(){
 		int firstNameIndex = (int)(Math.random() * firstNames.size());
 		int lastNameIndex = (int)(Math.random() * lastNames.size());
-		return new Name(firstNames.get(firstNameIndex), lastNames.get(lastNameIndex));
+		return new Name(firstNames.get(firstNameIndex),
+		    lastNames.get(lastNameIndex));
 	}
 
-	private void readFiles(File firstNamesFile, File lastNamesFile) throws IOException {
-		BufferedReader in_firstNames = new BufferedReader(new FileReader(firstNamesFile));
-		BufferedReader in_lastNames = new BufferedReader(new FileReader(lastNamesFile));
+	private void readFiles(File firstNamesFile, File lastNamesFile)
+	    throws IOException
+	{
+		BufferedReader in_firstNames = new BufferedReader(
+		    new FileReader(firstNamesFile));
+
+		BufferedReader in_lastNames = new BufferedReader(
+		    new FileReader(lastNamesFile));
 
 		String res = null;
 
