@@ -1,7 +1,7 @@
-package studiverwaltung.util.sort;
+package algorithms.sort;
 
-import studiverwaltung.util.structures.SimpleCollection;
-import studiverwaltung.util.structures.Vector;
+import algorithms.structures.SimpleCollection;
+import algorithms.structures.Vector;
 
 public class Sort {
 	public static <T extends Comparable<T>> boolean isSorted(

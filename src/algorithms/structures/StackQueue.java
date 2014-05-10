@@ -1,4 +1,4 @@
-package studiverwaltung.util.structures;
+package algorithms.structures;
 
 public class StackQueue<T> extends List<T> {
 	private boolean queue;

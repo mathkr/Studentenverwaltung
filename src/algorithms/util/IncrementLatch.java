@@ -1,4 +1,4 @@
-package studiverwaltung.util;
+package algorithms.util;
 
 import java.util.concurrent.CountDownLatch;
 

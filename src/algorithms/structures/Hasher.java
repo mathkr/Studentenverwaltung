@@ -1,4 +1,4 @@
-package studiverwaltung.util.structures;
+package algorithms.structures;
 
 public interface Hasher<K> {
 	public int hash(K key);

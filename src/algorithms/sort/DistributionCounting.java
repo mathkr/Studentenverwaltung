@@ -1,4 +1,4 @@
-package studiverwaltung.util.sort;
+package algorithms.sort;
 
 public class DistributionCounting {
 	public static void sort(int[] array){

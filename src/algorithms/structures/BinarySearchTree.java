@@ -1,4 +1,4 @@
-package studiverwaltung.util.structures;
+package algorithms.structures;
 
 import java.util.ArrayList;
 

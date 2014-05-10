@@ -1,4 +1,4 @@
-package studiverwaltung.util.structures;
+package algorithms.structures;
 
 public class HashTable<K, T> {
 	private final static int[] PRIMESIZES = {31, 61, 127, 251, 509, 1021, 2039,

@@ -1,9 +1,14 @@
-package studiverwaltung.util.sort;
+package algorithms.tests;
 
 import java.util.ArrayList;
 
-import studiverwaltung.util.structures.SimpleCollection;
-import studiverwaltung.util.structures.Vector;
+import algorithms.sort.ConcurrentQuicksort;
+import algorithms.sort.Heapsort;
+import algorithms.sort.Mergesort;
+import algorithms.sort.Quicksort;
+import algorithms.sort.Shellsort;
+import algorithms.structures.SimpleCollection;
+import algorithms.structures.Vector;
 
 public class TestManager {
 	private TestableSort quick = new TestableSort() {

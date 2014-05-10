@@ -1,6 +1,4 @@
-package studiverwaltung.util;
-
-import studiverwaltung.verwaltung.*;
+package util;
 
 import java.util.ArrayList;
 import java.io.*;
@@ -18,10 +16,10 @@ public class NameGenerator {
 		readFiles(firstNamesFile, lastNamesFile);
 	}
 
-	public Name getRandomName(){
+	public String getRandomName(){
 		int firstNameIndex = (int)(Math.random() * firstNames.size());
 		int lastNameIndex = (int)(Math.random() * lastNames.size());
-		return new Name(firstNames.get(firstNameIndex),
+		return new String(firstNames.get(firstNameIndex) +
 		    lastNames.get(lastNameIndex));
 	}
 

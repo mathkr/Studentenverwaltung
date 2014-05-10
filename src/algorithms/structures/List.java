@@ -1,4 +1,4 @@
-package studiverwaltung.util.structures;
+package algorithms.structures;
 
 public class List<T> implements SimpleCollection<T> {
 	private ListElement<T> head;

@@ -1,8 +1,9 @@
-package studiverwaltung.util.sort;
+package algorithms.tests;
 
 import java.util.ArrayList;
 
-import studiverwaltung.util.structures.SimpleCollection;
+import algorithms.sort.Sort;
+import algorithms.structures.SimpleCollection;
 
 public class SortTest {
 	private TestableSort testableSort;
