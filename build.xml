@@ -24,6 +24,7 @@
 			<classpath>
 				 <pathelement location="${classes.dir}"/>
 				 <pathelement location="${lib.dir}/mysql-connector-java-5.1.30-bin.jar"/>
+				 <pathelement location="${lib.dir}/activejdbc-1.4.6.jar"/>
 				 <pathelement path="${java.class.path}"/>
 			</classpath>
 		</java>
