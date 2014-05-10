@@ -13,8 +13,13 @@
 
 	<target name="build">
 		<mkdir dir="${classes.dir}" />
-		<javac 	srcdir="${src.dir}" debug="true" classpath="${lib.dir}"
-			destdir="${classes.dir}" includeantruntime="false" />
+		<javac 	srcdir="${src.dir}" debug="true" destdir="${classes.dir}" includeantruntime="false">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</javac>
 	</target>
 
 	<target name="run" depends="build, justrun" />
@@ -22,10 +27,10 @@
 	<target name="justrun">
 		<java classname="${main-class}" fork="true">
 			<classpath>
-				 <pathelement location="${classes.dir}"/>
-				 <pathelement location="${lib.dir}/mysql-connector-java-5.1.30-bin.jar"/>
-				 <pathelement location="${lib.dir}/activejdbc-1.4.6.jar"/>
-				 <pathelement path="${java.class.path}"/>
+				<pathelement location="${classes.dir}"/>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar"/>
+				</fileset>
 			</classpath>
 		</java>
 	</target>
