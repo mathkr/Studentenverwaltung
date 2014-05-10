@@ -4,3 +4,4 @@ build/
 *.hi
 *.o
 tools/primegen
+resources/stumadb
