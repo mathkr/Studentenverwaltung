@@ -35,7 +35,7 @@ public class NameGenerator {
 		readFiles(firstNamesFile, lastNamesFile);
 	}
 
-	public String getRandomName(){
+	public String getRandomName() {
 		int firstNameIndex = (int)(Math.random() * firstNames.size());
 		int lastNameIndex = (int)(Math.random() * lastNames.size());
 		return new String(firstNames.get(firstNameIndex) +
@@ -53,11 +53,11 @@ public class NameGenerator {
 
 		String res = null;
 
-		while((res = in_firstNames.readLine()) != null){
+		while ((res = in_firstNames.readLine()) != null) {
 			firstNames.add(res);
 		}
 
-		while((res = in_lastNames.readLine()) != null){
+		while ((res = in_lastNames.readLine()) != null) {
 			lastNames.add(res);
 		}
 

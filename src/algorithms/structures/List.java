@@ -24,36 +24,36 @@ public class List<T> implements SimpleCollection<T> {
 	private ListElement<T> tail;
 
 	private int size;
-	
-	public List(){
+
+	public List() {
 		head = null;
 		tail = null;
 		size = 0;
 	}
 
-	public int size(){
+	public int size() {
 		return this.size;
 	}
 
-	public void push_back(T arg){
+	public void push_back(T arg) {
 		tail = new ListElement<T>(arg, tail, null);
 		if(size == 0) head = tail;
 		++size;
 	}
 
-	public void push_front(T arg){
+	public void push_front(T arg) {
 		head = new ListElement<T>(arg, null, head);
 		if(size == 0) tail = head;
 		++size;
 	}
 
-	public T get(int i){
+	public T get(int i) {
 		checkBounds(i);
 
 		return (T) getListElement(i).getObject();
 	}
 
-	public T getHead(){
+	public T getHead() {
 		if(tail != null){
 			return (T) head.getObject();
 		} else {
@@ -61,7 +61,7 @@ public class List<T> implements SimpleCollection<T> {
 		}
 	}
 
-	public T getTail(){
+	public T getTail() {
 		if(tail != null){
 			return (T) tail.getObject();
 		} else {
@@ -69,7 +69,7 @@ public class List<T> implements SimpleCollection<T> {
 		}
 	}
 
-	public void set(int i, T arg){
+	public void set(int i, T arg) {
 		checkBounds(i);
 
 		ListElement<T> e = getListElement(i);
@@ -77,13 +77,13 @@ public class List<T> implements SimpleCollection<T> {
 		e.setObject(arg);
 	}
 
-	public void delete(int i){
+	public void delete(int i) {
 		checkBounds(i);
 
 		ListElement<T> e = getListElement(i);
 
-		if (e == head){
-			if(e.getNext() != null){
+		if (e == head) {
+			if (e.getNext() != null) {
 				head = e.getNext();
 				head.setPrev(null);
 				--size;
@@ -92,8 +92,8 @@ public class List<T> implements SimpleCollection<T> {
 				tail = null;
 				size = 0;
 			}
-		} else if (e == tail){
-			if(e.getPrev() != null){
+		} else if (e == tail) {
+			if (e.getPrev() != null) {
 				tail = e.getPrev();
 				tail.setNext(null);
 				--size;
@@ -107,9 +107,9 @@ public class List<T> implements SimpleCollection<T> {
 		e = null;
 	}
 
-	public void removeTail(){
-		if(tail != null){
-			if(tail == head){
+	public void removeTail() {
+		if (tail != null) {
+			if (tail == head) {
 				tail = null;
 				head = null;
 				--size;
@@ -121,9 +121,9 @@ public class List<T> implements SimpleCollection<T> {
 		}
 	}
 
-	public void removeHead(){
-		if(head != null){
-			if(head == tail){
+	public void removeHead() {
+		if (head != null) {
+			if (head == tail) {
 				head = null;
 				tail = null;
 				--size;

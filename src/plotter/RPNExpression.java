@@ -55,7 +55,7 @@ public class RPNExpression {
 	}
 
 	public double solve(double x) {
-		Stack<Double> stack = new Stack<Double>();;
+		Stack<Double> stack = new Stack<Double>();
 
 		for (int i = 0; i < expression.size(); ++i) {
 			Token t = expression.get(i);

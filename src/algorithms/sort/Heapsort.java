@@ -48,7 +48,7 @@ public class Heapsort {
 
 			c = lc.compareTo(rc) > 0 ? lChild(x) : rChild(x);
 		}
-		
+
 		if (col.get(c).compareTo(col.get(x)) > 0) swap(col, x, c);
 		sink(col, c, to);
 	}

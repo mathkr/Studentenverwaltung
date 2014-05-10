@@ -22,18 +22,18 @@ package algorithms.structures;
 public class StackQueue<T> extends List<T> {
 	private boolean queue;
 
-	public StackQueue(boolean queue){
+	public StackQueue(boolean queue) {
 		super();
 		this.queue = queue;
 	}
 
-	public void push(T object){
+	public void push(T object) {
 		push_back(object);
 	}
 
-	public T pop(){
+	public T pop() {
 		T res = null;
-		if(queue){
+		if (queue) {
 			res = getHead();
 			removeHead();
 		} else {
@@ -44,9 +44,9 @@ public class StackQueue<T> extends List<T> {
 		return res;
 	}
 
-	public T peek(){
+	public T peek() {
 		T res = null;
-		if(queue){
+		if (queue) {
 			res = getHead();
 		} else {
 			res = getTail();

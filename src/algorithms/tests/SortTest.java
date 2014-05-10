@@ -33,16 +33,15 @@ public class SortTest {
 	private SimpleCollection<Integer> col;
 
 	public SortTest(TestableSort testableSort,
-			String name,
-			SimpleCollection<Integer> col){
-
+	    String name, SimpleCollection<Integer> col)
+	{
 		this.testableSort = testableSort;
 		this.name = name;
 		this.times = new ArrayList<Long>();
 		this.col = col;
 	}
 
-	public long test(){
+	public long test() {
 		SimpleCollection<Integer> newCol = Sort.copyCollection(col);
 
 		long before = System.currentTimeMillis();
@@ -52,7 +51,7 @@ public class SortTest {
 
 		boolean hasSorted = Sort.isSorted(newCol);
 
-		if(hasSorted){
+		if (hasSorted) {
 			times.add(time);
 		} else {
 			System.out.println(this + ": incorrect sort");
@@ -61,25 +60,25 @@ public class SortTest {
 		return time;
 	}
 
-	public TestableSort getTestableSort(){
+	public TestableSort getTestableSort() {
 		return testableSort;
 	}
 
-	public double getAverage(){
+	public double getAverage() {
 		double res = 0;
-		for(int i = 0; i < times.size(); ++i){
+		for (int i = 0; i < times.size(); ++i) {
 			res += times.get(i);
 		}
-		
+
 		return (res == 0) ? 0 : res / times.size();
 	}
 
-	public double getCorrectedAverage(){
+	public double getCorrectedAverage() {
 		double res = 0;
 		long min = (times.size() > 0) ? times.get(0) : 0;
 		long max = (times.size() > 0) ? times.get(0) : 0;
 
-		for(int i = 0; i < times.size(); ++i){
+		for (int i = 0; i < times.size(); ++i) {
 			long val = times.get(i);
 			min = (min < val) ? min : val;
 			max = (max > val) ? max : val;

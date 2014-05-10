@@ -19,6 +19,4 @@
 
 package plotter;
 
-public interface Token {
-
-}
+public interface Token {}

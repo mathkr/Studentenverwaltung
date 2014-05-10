@@ -31,7 +31,7 @@ import algorithms.structures.Vector;
 
 public class TestManager {
 	private TestableSort quick = new TestableSort() {
-		public void sort(SimpleCollection<Integer> col){
+		public void sort(SimpleCollection<Integer> col) {
 			Quicksort.sort(col);
 		}
 
@@ -40,7 +40,7 @@ public class TestManager {
 	};
 
 	private TestableSort concurrentQuick = new TestableSort() {
-		public void sort(SimpleCollection<Integer> col){
+		public void sort(SimpleCollection<Integer> col) {
 			ConcurrentQuicksort.sort(col);
 		}
 
@@ -49,7 +49,7 @@ public class TestManager {
 	};
 
 	private TestableSort merge = new TestableSort() {
-		public void sort(SimpleCollection<Integer> col){
+		public void sort(SimpleCollection<Integer> col) {
 			Mergesort.sort(col);
 		}
 
@@ -58,7 +58,7 @@ public class TestManager {
 	};
 
 	private TestableSort shell = new TestableSort() {
-		public void sort(SimpleCollection<Integer> col){
+		public void sort(SimpleCollection<Integer> col) {
 			Shellsort.sort(col);
 		}
 
@@ -67,7 +67,7 @@ public class TestManager {
 	};
 
 	private TestableSort heap = new TestableSort() {
-		public void sort(SimpleCollection<Integer> col){
+		public void sort(SimpleCollection<Integer> col) {
 			Heapsort.sort(col);
 		}
 
@@ -86,13 +86,21 @@ public class TestManager {
 
 	private TestManager() {
 		System.out.println("preparing sort data...");
- 		Vector<Integer> rnd_500_hi = getRandomVector(500, HIGH_DIVERSITY);
-		Vector<Integer> rnd_50k_hi = getRandomVector(50000, HIGH_DIVERSITY);
-		Vector<Integer> rnd_1mi_hi = getRandomVector(1000000, HIGH_DIVERSITY);
- 		Vector<Integer> rnd_5mi_hi = getRandomVector(5000000, HIGH_DIVERSITY);
-		/* Vector<Integer> rnd_5mi_lo = getRandomVector(5000000, LOW_DIVERSITY); */
 
-		Vector<Integer> cst_50k = getConstantVector(50000, CONSTANT_VALUE);
+ 		Vector<Integer> rnd_500_hi = getRandomVector(500,
+		    HIGH_DIVERSITY);
+
+		Vector<Integer> rnd_50k_hi = getRandomVector(50000,
+		    HIGH_DIVERSITY);
+
+		Vector<Integer> rnd_1mi_hi = getRandomVector(1000000,
+		    HIGH_DIVERSITY);
+
+ 		Vector<Integer> rnd_5mi_hi = getRandomVector(5000000,
+		    HIGH_DIVERSITY);
+
+		Vector<Integer> cst_50k = getConstantVector(50000,
+		    CONSTANT_VALUE);
 
 		Vector<Integer> asc_500 = getSortedVector(500, true);
 		Vector<Integer> asc_50k = getSortedVector(50000, true);
@@ -104,7 +112,9 @@ public class TestManager {
 		Vector<Integer> dsc_1mi = getSortedVector(1000000, false);
 		Vector<Integer> dsc_5mi = getSortedVector(5000000, false);
 
-		ArrayList<TestableSort> testableSorts = new ArrayList<TestableSort>();
+		ArrayList<TestableSort> testableSorts =
+		    new ArrayList<TestableSort>();
+
 		testableSorts.add(quick);
 		testableSorts.add(concurrentQuick);
 		testableSorts.add(merge);
@@ -113,12 +123,11 @@ public class TestManager {
 
 		tests = new ArrayList<SortTest>();
 
-		for(TestableSort ts : testableSorts){
+		for (TestableSort ts : testableSorts) {
  			tests.add(new SortTest(ts, "rnd 500 high", rnd_500_hi));
 			tests.add(new SortTest(ts, "rnd 50k high", rnd_50k_hi));
 			tests.add(new SortTest(ts, "rnd 1mi high", rnd_1mi_hi));
  			tests.add(new SortTest(ts, "rnd 5mi high", rnd_5mi_hi));
-			/* tests.add(new SortTest(ts, "rnd 5mi  low", rnd_5mi_lo)); */
 
  			tests.add(new SortTest(ts, "constant 50k", cst_50k));
 
@@ -136,49 +145,51 @@ public class TestManager {
 		testCount = 0;
 	}
 
-	public void runTests(int num){
+	public void runTests(int num) {
 		System.out.println("running tests:");
-		for(int i = 0; i < num; ++i){
-			for(int j = 0; j < tests.size(); ++j){
-				System.out.printf("starting test %04d: " + tests.get(j) + "%n", testCount++);
+		for (int i = 0; i < num; ++i) {
+			for (int j = 0; j < tests.size(); ++j) {
+				System.out.printf("starting test %04d: " +
+				    tests.get(j) + "%n", testCount++);
 				tests.get(j).test();
 			}
 		}
 		System.out.println("finished tests");
 	}
 
-	public void printTests(){
-		for(int i = 0; i < tests.size(); ++i){
-			System.out.println(tests.get(i) + ": " + tests.get(i).getAverage() + "ms");
+	public void printTests() {
+		for (int i = 0; i < tests.size(); ++i) {
+			System.out.println(tests.get(i) + ": " +
+			    tests.get(i).getAverage() + "ms");
 		}
 	}
 
-	private Vector<Integer> getSortedVector(int length, boolean ascending){
+	private Vector<Integer> getSortedVector(int length, boolean ascending) {
 		Vector<Integer> res = new Vector<Integer>(length);
-		for(int i = 0; i < length; ++i){
+		for (int i = 0; i < length; ++i) {
 			res.push_back(ascending ? i : length - i);
 		}
 		return res;
 	}
 
-	private Vector<Integer> getConstantVector(int length, int constant){
+	private Vector<Integer> getConstantVector(int length, int constant) {
 		Vector<Integer> res = new Vector<Integer>(length);
-		for(int i = 0; i < length; ++i){
+		for (int i = 0; i < length; ++i) {
 			res.push_back(constant);
 		}
 		return res;
 	}
 
-	private Vector<Integer> getRandomVector(int length, int values){
+	private Vector<Integer> getRandomVector(int length, int values) {
 		Vector<Integer> res = new Vector<Integer>(length);
-		for(int i = 0; i < length; ++i){
+		for (int i = 0; i < length; ++i) {
 			res.push_back((int) (Math.random() * values));
 		}
 		return res;
 	}
 
-	public static TestManager getTestManager(){
-		if(testManager == null){
+	public static TestManager getTestManager() {
+		if (testManager == null) {
 			testManager = new TestManager();
 		}
 

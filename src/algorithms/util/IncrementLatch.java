@@ -34,25 +34,25 @@ public class IncrementLatch {
 	private int countDown;
 	private CountDownLatch countDownLatch;
 
-	public IncrementLatch(int initialCountDown){
+	public IncrementLatch(int initialCountDown) {
 		this.countDown = initialCountDown;
 		if (initialCountDown != 0) {
 			 countDownLatch = new CountDownLatch(1);
 		}
 	}
 
-	public IncrementLatch(){
+	public IncrementLatch() {
 		this(0);
 	}
 
-	synchronized public void increment(){
+	synchronized public void increment() {
 		if (countDownLatch == null) {
 			countDownLatch = new CountDownLatch(1);
 		}
 		++countDown;
 	}
 
-	synchronized public void decrement(){
+	synchronized public void decrement() {
 		--countDown;
 		if (countDown  <= 0) {
 			countDownLatch.countDown();
