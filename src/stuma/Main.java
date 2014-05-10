@@ -20,26 +20,34 @@
 package stuma;
 
 import org.javalite.activejdbc.Base;
-import org.javalite.activejdbc.Model;
-
-import com.mysql.jdbc.Driver;
 
 public class Main {
-	private class Student extends Model {}
-
 	public static void main (String[] args) {
-		String driver = "com.mysql.jdbc.Driver";
-		String db = "jdbc:mysql://h2285677.stratoserver.net/stuma";
-		String user = "stuma";
-		String pw = "samsung";
+		String driver = Config.database().getProperty("driver");
+		String protocol = Config.database().getProperty("protocol");
+		String host = Config.database().getProperty("host");
+		String database = Config.database().getProperty("database");
+		String user = Config.database().getProperty("user");
+		String pass = Config.database().getProperty("pass");
 
-		Base.open(driver, db, user, pw);
+		String con= "jdbc:" + protocol + "://" + host + "/" + database;
 
-		Student.createIt(
-		    "last_name",  "Krause",
-		    "first_name", "Matthis",
-		    "dob",   	  "1991-06-02"
-		);
+		Base.open(driver, con, user, pass);
+
+		/* Student s = new Student(); */
+		/* s.set("first_name", "Hans"); */
+		/* s.set("last_name", "Meier"); */
+		/* s.set("dob", "1989-04-21"); */
+		/* s.saveIt(); */
+
+		Student s = Student.findFirst("first_name = ?", "Matthis");
+		System.out.println(s);
+
+		/* Student.createIt( */
+		/*     "last_name",  "Krause", */
+		/*     "first_name", "Matthis", */
+		/*     "dob",   	  "1991-06-02" */
+		/* ); */
 
 		Base.close();
 	}
