@@ -19,57 +19,28 @@
 
 package stuma;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.Date;
+import org.javalite.activejdbc.Base;
+import org.javalite.activejdbc.Model;
+
+import com.mysql.jdbc.Driver;
 
 public class Main {
+	private class Student extends Model {}
+
 	public static void main (String[] args) {
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		String driver = "com.mysql.jdbc.Driver";
+		String db = "jdbc:mysql://h2285677.stratoserver.net/stuma";
+		String user = "stuma";
+		String pw = "samsung";
 
-			Connection con = DriverManager.getConnection(
-    			    "jdbc:mysql://h2285677.stratoserver.net/" +
-			    "stuma?user=stuma&password=samsung");
+		Base.open(driver, db, user, pw);
 
-			System.out.println("connection successful");
+		Student.createIt(
+		    "last_name",  "Krause",
+		    "first_name", "Matthis",
+		    "dob",   	  "1991-06-02"
+		);
 
-			String query = "SELECT TABLE_NAME FROM " +
-			    "INFORMATION_SCHEMA.TABLES WHERE " +
-			    "TABLE_TYPE='base TABLE' AND TABLE_SCHEMA='stuma'";
-
-			ResultSet rs = con.createStatement()
-			    .executeQuery(query);
-
-			System.out.println("\ntables:");
-			while (rs.next()) {
-				System.out.println(rs.getString(1));
-			}
-			System.out.println();
-
-			query = "SELECT * FROM students";
-			rs = con.createStatement().executeQuery(query);
-
-			System.out.println("\nstudents:");
-			while (rs.next()) {
-				String name = rs.getString("first_name");
-				name += " " + rs.getString("last_name");
-				Date bday = rs.getDate("birthday");
-				int matrikel = rs.getInt("matrikel");
-
-				System.out.printf("%s %d %s%n",
-				    name, matrikel, bday.toString());
-			}
-			System.out.println();
-
-		} catch (SQLException e) {
-			System.out.println("message: " + e.getMessage());
-			System.out.println("state: " + e.getSQLState());
-			System.out.println("errorcode: " + e.getErrorCode());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Base.close();
 	}
 }
