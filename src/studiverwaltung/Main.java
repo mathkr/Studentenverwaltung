@@ -1,37 +1,58 @@
 package studiverwaltung;
 
-import studiverwaltung.util.structures.SimpleCollection;
-import plotter.RPNExpression;
-import plotter.PlotterFrame;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Date;
 
 public class Main {
- 	public static void main(String[] args) {
-		if (args.length >= 3) {
-			RPNExpression[] rpns =
-			    new RPNExpression[args.length - 2];
-			for (int i = 2; i < args.length; ++i) {
-				rpns[i - 2] = new RPNExpression(args[i]);
+	public static void main (String[] args) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+			Connection con = DriverManager.getConnection(
+    			    "jdbc:mysql://h2285677.stratoserver.net/" +
+			    "stuma?user=stuma&password=samsung");
+
+			System.out.println("connection successful");
+
+			String query = "SELECT TABLE_NAME FROM " +
+			    "INFORMATION_SCHEMA.TABLES WHERE " +
+			    "TABLE_TYPE='base TABLE' AND TABLE_SCHEMA='stuma'";
+
+			ResultSet rs = con.createStatement()
+			    .executeQuery(query);
+
+			System.out.println("\ntables:");
+			while (rs.next()) {
+				System.out.println(rs.getString(1));
 			}
+			System.out.println();
 
-			new PlotterFrame(Double.parseDouble(args[0]),
-			    Double.parseDouble(args[1]), rpns);
-		} else {
-			String usage = "USAGE: plot min max rpn-expressions...";
-			System.out.println(usage);
-		}
-	}
+			query = "SELECT * FROM students";
+			rs = con.createStatement().executeQuery(query);
 
-	private static void printCollection(SimpleCollection col) {
-		for (int i = 0; i < col.size(); ++i) {
-			System.out.print(col.get(i) + "\t");
-		}
-		System.out.println();
-	}
+			System.out.println("\nstudents:");
+			while (rs.next()) {
+				String name = rs.getString("first_name");
+				name += " " + rs.getString("last_name");
+				int pruefungen = rs.getInt("pruefungen");
+				Date bday = rs.getDate("birthday");
+				int matrikel = rs.getInt("matrikel");
 
-	private static void printArray(int[] a) {
-		for (int i = 0; i < a.length; ++i) {
-			System.out.print(a[i] + "\t");
+				System.out.printf("%s %d %s%n",
+				    name, matrikel, bday.toString());
+			}
+			System.out.println();
+
+		} catch (SQLException e) {
+			System.out.println("message: " + e.getMessage());
+			System.out.println("state: " + e.getSQLState());
+			System.out.println("errorcode: " + e.getErrorCode());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		System.out.println();
 	}
 }
