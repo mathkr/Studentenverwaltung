@@ -1,4 +1,4 @@
-<project name="Studentenverwaltung" basedir="." default="main">
+<project name="stuma" basedir="." default="main">
 	<property name="src.dir"	value="src" />
 	<property name="build.dir"	value="build" />
 	<property name="classes.dir"	value="${build.dir}/classes" />
@@ -20,6 +20,18 @@
 				</fileset>
 			</classpath>
 		</javac>
+	</target>
+
+	<target name="instrument" depends="build">
+		<java classname="org.javalite.instrumentation.Main">
+			<sysproperty key="outputDirectory" value="${classes.dir}"/>
+			<classpath>
+				<pathelement location="${classes.dir}"/>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
 	</target>
 
 	<target name="run" depends="build, justrun" />
