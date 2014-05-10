@@ -4,7 +4,7 @@ import algorithms.structures.SimpleCollection;
 
 public class Heapsort {
 	public static <T extends Comparable<T>> void sort(
-	    SimpleCollection col)
+	    SimpleCollection<T> col)
 	{
 		for (int i = parent(col.size() - 1); i >= 0; --i) {
 			sink(col, i, col.size() - 1);

@@ -13,8 +13,8 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 		public P key;
 		public Q value;
 
-		public Node left;
-		public Node right;
+		public Node<P, Q> left;
+		public Node<P, Q> right;
 
 		public Node(P key, Q value) {
 			this.key = key;
@@ -51,7 +51,7 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 	private Node<K, T> put(Node<K, T> node, K key, T value) {
 		if (node == null) {
 			++size;
-			return new Node(key, value);
+			return new Node<K, T>(key, value);
 		}
 
 		int compare = key.compareTo(node.key);

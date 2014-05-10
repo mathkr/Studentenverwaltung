@@ -63,6 +63,7 @@ public class PlotterFrame extends Frame {
 		setVisible(true);
 	}
 
+	@SuppressWarnings("unchecked")
 	private ArrayList<Point>[] createPoints(RPNExpression[] rpns) {
 		ArrayList<Point>[] res = new ArrayList[rpns.length];
 

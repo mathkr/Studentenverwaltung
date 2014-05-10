@@ -3,7 +3,6 @@ package stuma;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Date;
 
@@ -38,7 +37,6 @@ public class Main {
 			while (rs.next()) {
 				String name = rs.getString("first_name");
 				name += " " + rs.getString("last_name");
-				int pruefungen = rs.getInt("pruefungen");
 				Date bday = rs.getDate("birthday");
 				int matrikel = rs.getInt("matrikel");
 

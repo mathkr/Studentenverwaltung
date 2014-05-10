@@ -11,6 +11,7 @@ public class HashTable<K, T> {
 	private int nodesSizeIndex;
 	private Hasher<K> hasher;
 
+	@SuppressWarnings("unchecked")
 	public HashTable(Hasher<K> hasher) {
 		nodesSizeIndex = 0;
 		nodes = new Node[PRIMESIZES[nodesSizeIndex]];
@@ -36,7 +37,7 @@ public class HashTable<K, T> {
 			++index;
 			index %= nodes.length;
 		}
-		nodes[index] = new Node(key, value);
+		nodes[index] = new Node<K, T>(key, value);
 		++filled;
 	}
 
@@ -68,7 +69,7 @@ public class HashTable<K, T> {
 			nodes[index] = null;
 			--filled;
 			while (nodes[++index] != null) {
-				Node tmp = nodes[index];
+				Node<K, T> tmp = nodes[index];
 				nodes[index] = null;
 				--filled;
 				put((K)tmp.key, (T)tmp.val);
@@ -78,6 +79,7 @@ public class HashTable<K, T> {
 		return res;
 	}
 
+	@SuppressWarnings("unchecked")
 	private void enlarge() {
 		Node<K, T>[] newNodes = new Node[PRIMESIZES[++nodesSizeIndex]];
 		for (int i = 0; i < nodes.length; ++i) {
