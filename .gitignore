@@ -5,3 +5,4 @@ build/
 *.o
 tools/primegen
 resources/stumadb
+.project
