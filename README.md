@@ -1,11 +1,14 @@
+### Stuma - a student manager
+
+Programming assignments for Programmieren I + II at the Hochschule
+Bremerhaven, GERMANY.
+
+Depends on Java 8 for lambda expressions.
+
+* * *
+
 build and run with:
 
 ```
-ant run
-```
-
-or just:
-
-```
-ant
+ant instrument && ant run
 ```
