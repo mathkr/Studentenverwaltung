@@ -7,3 +7,4 @@ tools/primegen
 resources/stumadb
 .project
 .settings/
+.classpath
