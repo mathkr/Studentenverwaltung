@@ -22,7 +22,7 @@ package plotter;
 import java.util.Stack;
 
 public class OperatorToken implements Token {
-	//@FunctionalInterface
+	@FunctionalInterface
 	private interface Operation {
 		public void operate(Stack<Double> s);
 	}
@@ -32,99 +32,66 @@ public class OperatorToken implements Token {
 	public OperatorToken(String operator) {
 		switch (operator) {
 			case "+":
-				operation = new Operation() {
-					@Override
-					public void operate(Stack<Double> s) {
-						double a = s.pop();
-						double b = s.pop();
-						s.push(b + a);
-					}
+				operation = (Stack<Double> s) -> {
+					double a = s.pop();
+					double b = s.pop();
+					s.push(b + a);
 				};
 				break;
+
 			case "-":
-				operation = new Operation() {
-					@Override
-					public void operate(Stack<Double> s) {
-						double a = s.pop();
-						double b = s.pop();
-						s.push(b - a);
-					}
+				operation = (Stack<Double> s) -> {
+					double a = s.pop();
+					double b = s.pop();
+					s.push(b - a);
 				};
 				break;
+
 			case "*":
-				operation = new Operation() {
-					@Override
-					public void operate(Stack<Double> s) {
-						double a = s.pop();
-						double b = s.pop();
-						s.push(b * a);
-					}
+				operation = (Stack<Double> s) -> {
+					double a = s.pop();
+					double b = s.pop();
+					s.push(b * a);
 				};
 				break;
+
 			case "/":
-				operation = new Operation() {
-					@Override
-					public void operate(Stack<Double> s) {
-						double a = s.pop();
-						double b = s.pop();
-						s.push(b / a);
-					}
+				operation = (Stack<Double> s) -> {
+					double a = s.pop();
+					double b = s.pop();
+					s.push(b / a);
 				};
 				break;
+
 			case "sqrt":
-				operation = new Operation() {
-					@Override
-					public void operate(Stack<Double> s) {
-						double a = s.pop();
-						s.push(Math.sqrt(a));
-					}
-				};
+				operation = (Stack<Double> s) ->
+				    s.push(Math.sqrt(s.pop()));
 				break;
+
 			case "sin":
-				operation = new Operation() {
-					@Override
-					public void operate(Stack<Double> s) {
-						double a = s.pop();
-						s.push(Math.sin(a));
-					}
-				};
+				operation = (Stack<Double> s) ->
+				    s.push(Math.sin(s.pop()));
 				break;
+
 			case "cos":
-				operation = new Operation() {
-					@Override
-					public void operate(Stack<Double> s) {
-						double a = s.pop();
-						s.push(Math.cos(a));
-					}
-				};
+				operation = (Stack<Double> s) ->
+				    s.push(Math.cos(s.pop()));
 				break;
+
 			case "log":
-				operation = new Operation() {
-					@Override
-					public void operate(Stack<Double> s) {
-						double a = s.pop();
-						s.push(Math.log10(a));
-					}
-				};
+				operation = (Stack<Double> s) ->
+				    s.push(Math.log10(s.pop()));
 				break;
+
 			case "ln":
-				operation = new Operation() {
-					@Override
-					public void operate(Stack<Double> s) {
-						double a = s.pop();
-						s.push(Math.log(a));
-					}
-				};
+				operation = (Stack<Double> s) ->
+				    s.push(Math.log(s.pop()));
 				break;
 			default:
 				System.err.println("Unknown operator: "
 				    + operator);
 
-				operation = new Operation() {
-					@Override
-					public void operate(Stack<Double> s) {
-					}
-				};
+				operation = (Stack<Double> s) -> {};
 		}
 	}
 
