@@ -86,6 +86,7 @@ public class RPNExpression {
 			case "-":
 			case "*":
 			case "/":
+			case "pow":
 			case "sqrt":
 			case "sin":
 			case "cos":

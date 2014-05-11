@@ -63,6 +63,14 @@ public class OperatorToken implements Token {
 				};
 				break;
 
+			case "pow":
+				operation = (Stack<Double> s) -> {
+					double a = s.pop();
+					double b = s.pop();
+					s.push(Math.pow(b, a));
+				};
+				break;
+
 			case "sqrt":
 				operation = (Stack<Double> s) ->
 				    s.push(Math.sqrt(s.pop()));
