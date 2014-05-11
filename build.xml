@@ -38,6 +38,7 @@
 
 	<target name="justrun">
 		<java classname="${main-class}" fork="true">
+			<jvmarg value="-Dactivejdbc.log"/>
 			<classpath>
 				<pathelement location="${classes.dir}"/>
 				<fileset dir="${lib.dir}">

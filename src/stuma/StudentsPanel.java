@@ -19,31 +19,22 @@
 
 package stuma;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.BorderLayout;
+import javax.swing.*;
+import javax.swing.table.*;
 
-public class Main {
-	private static List<Subsystem> subsystems;
+public class StudentsPanel extends JPanel {
+	private JTable table;
 
-	public static void main (String[] args) {
-		StumaModel model = StumaModel.getStumaModel();
+	public StudentsPanel(TableModel tableModel) {
+		setLayout(new BorderLayout(0, 0));
 
-		StumaView view = StumaView.getStumaView(model);
+		JScrollPane scrollPane = new JScrollPane();
+		add(scrollPane, BorderLayout.CENTER);
 
-		StumaController controller =
-		    StumaController.getStumaController(model, view);
-
-
-		subsystems = new ArrayList<Subsystem>();
-		subsystems.add(model);
-		subsystems.add(controller);
+		table = new JTable(tableModel);
+		table.setFillsViewportHeight(true);
+		scrollPane.setViewportView(table);
 	}
 
-	public static void exit(int state) {
-		for (Subsystem s : subsystems) {
-			s.close();
-		}
-
-		System.exit(state);
-	}
 }

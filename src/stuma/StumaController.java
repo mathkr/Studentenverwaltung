@@ -19,31 +19,45 @@
 
 package stuma;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.*;
+import java.awt.*;
 
-public class Main {
-	private static List<Subsystem> subsystems;
+public class StumaController implements Subsystem {
+	private static StumaController singleton;
 
-	public static void main (String[] args) {
-		StumaModel model = StumaModel.getStumaModel();
+	private StumaModel model;
+	private StumaView view;
 
-		StumaView view = StumaView.getStumaView(model);
+	private StumaController(StumaModel model, StumaView view) {
+		this.model = model;
+		this.view = view;
 
-		StumaController controller =
-		    StumaController.getStumaController(model, view);
+		view.frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				Main.exit(0);
+			}
 
+			@Override
+			public void windowClosing(WindowEvent e) {
+				Main.exit(0);
+			}
+		});
 
-		subsystems = new ArrayList<Subsystem>();
-		subsystems.add(model);
-		subsystems.add(controller);
 	}
 
-	public static void exit(int state) {
-		for (Subsystem s : subsystems) {
-			s.close();
+	public static StumaController getStumaController(StumaModel model,
+	    StumaView view)
+	{
+		if (singleton == null) {
+			singleton = new StumaController(model, view);
 		}
 
-		System.exit(state);
+		return singleton;
 	}
+
+
+
+	@Override
+	public void close() {}
 }

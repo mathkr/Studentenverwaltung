@@ -19,31 +19,6 @@
 
 package stuma;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Main {
-	private static List<Subsystem> subsystems;
-
-	public static void main (String[] args) {
-		StumaModel model = StumaModel.getStumaModel();
-
-		StumaView view = StumaView.getStumaView(model);
-
-		StumaController controller =
-		    StumaController.getStumaController(model, view);
-
-
-		subsystems = new ArrayList<Subsystem>();
-		subsystems.add(model);
-		subsystems.add(controller);
-	}
-
-	public static void exit(int state) {
-		for (Subsystem s : subsystems) {
-			s.close();
-		}
-
-		System.exit(state);
-	}
+public interface Subsystem {
+	public void close();
 }
