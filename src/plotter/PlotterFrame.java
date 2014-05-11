@@ -34,6 +34,11 @@ public class PlotterFrame extends Frame {
 		}
 	}
 
+	private static final Color[] COLORS = { Color.BLACK, Color.BLUE,
+	    Color.GREEN, new Color(0.5f, 0.5f, 0.5f), Color.CYAN.darker(),
+	    Color.MAGENTA };
+
+
 	private WindowListener winListener = new WindowAdapter() {
 		@Override
 		public void windowClosed(WindowEvent e) {
@@ -91,13 +96,11 @@ public class PlotterFrame extends Frame {
 	@Override
 	public void paint(Graphics g) {
 		g.clearRect(0, 0, getWidth(), getHeight());
+		printScale(g);
 
-		g.setColor(Color.RED);
-		g.drawLine(getX(min), getY(0), getX(max), getY(0));
-		g.drawLine(getX(0), getY(min), getX(0), getY(max));
-
-		g.setColor(Color.BLACK);
 		for (int i = 0; i < points.length; ++i) {
+			g.setColor(COLORS[i % COLORS.length]);
+
 			for (int j = 0; j < points[i].size() - 1; ++j) {
 				Point a = points[i].get(j);
 				Point b = points[i].get(j + 1);
@@ -111,6 +114,37 @@ public class PlotterFrame extends Frame {
 							getX(b.x), getY(b.y));
 				}
 			}
+		}
+	}
+
+	private void printScale(Graphics g) {
+		g.setColor(Color.RED);
+
+		g.drawLine(getX(min), getY(0), getX(max), getY(0));
+		g.drawLine(getX(0), getY(min), getX(0), getY(max));
+
+		double scaleWidth = 0.125;
+
+		for (int i = 1; i < (int)Math.ceil(max - min); ++i) {
+			g.drawLine(getX(-scaleWidth), getY(i),
+			    getX(scaleWidth), getY(i));
+			g.drawLine(getX(-scaleWidth), getY(-i),
+			    getX(scaleWidth), getY(-i));
+
+			g.drawLine(getX(-scaleWidth/2), getY(i - 0.5),
+			    getX(scaleWidth/2), getY(i - 0.5));
+			g.drawLine(getX(-scaleWidth/2), getY(-i + 0.5),
+			    getX(scaleWidth/2), getY(-i + 0.5));
+
+			g.drawLine(getX(i), getY(scaleWidth),
+			    getX(i), getY(-scaleWidth));
+			g.drawLine(getX(-i), getY(scaleWidth),
+			    getX(-i), getY(-scaleWidth));
+
+			g.drawLine(getX(i - 0.5), getY(scaleWidth/2),
+			    getX(i - 0.5), getY(-scaleWidth/2));
+			g.drawLine(getX(-i + 0.5), getY(scaleWidth/2),
+			    getX(-i + 0.5), getY(-scaleWidth/2));
 		}
 	}
 
