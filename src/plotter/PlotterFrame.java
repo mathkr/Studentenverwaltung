@@ -34,10 +34,7 @@ public class PlotterFrame extends Frame {
 		}
 	}
 
-	private WindowListener winListener = new WindowListener() {
-		@Override
-		public void windowActivated(WindowEvent e) {}
-
+	private WindowListener winListener = new WindowAdapter() {
 		@Override
 		public void windowClosed(WindowEvent e) {
 			System.exit(0);
@@ -47,18 +44,6 @@ public class PlotterFrame extends Frame {
 		public void windowClosing(WindowEvent e) {
 			System.exit(0);
 		}
-
-		@Override
-		public void windowDeactivated(WindowEvent e) {}
-
-		@Override
-		public void windowDeiconified(WindowEvent e) {}
-
-		@Override
-		public void windowIconified(WindowEvent e) {}
-
-		@Override
-		public void windowOpened(WindowEvent e) {}
 	};
 
 	private static final double RES = 1000.0;
