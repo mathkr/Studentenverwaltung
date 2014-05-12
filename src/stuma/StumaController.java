@@ -34,11 +34,6 @@ public class StumaController implements Subsystem {
 
 		view.frame.addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosed(WindowEvent e) {
-				Main.exit(0);
-			}
-
-			@Override
 			public void windowClosing(WindowEvent e) {
 				Main.exit(0);
 			}
