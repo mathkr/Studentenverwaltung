@@ -24,11 +24,10 @@ import java.io.*;
 public class TemplateTest {
 	public static void main(String[] args) {
 		StumaModel model = StumaModel.getStumaModel();
-		Student student = model.getStudentById(1);
+		Student student = model.getStudentById(3);
 
 		Template t = new Template("resources/test.md",
-				// "pandoc -f markdown -t pdf -o %%-output-%% %%-input-%%");
-				"echo %%-input-%% > %%-output-%%");
+		    "pandoc -o %%-output-%% %%-input-%%");
 
 		String[] labels = {"last_name", "first_name", "dob"};
 		String[] values = new String[labels.length];
@@ -37,7 +36,7 @@ public class TemplateTest {
 		}
 
 		try {
-			t.applyTemplate(labels, values, "resource/test.pdf");
+			t.applyTemplate(labels, values, "resources/test.pdf");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

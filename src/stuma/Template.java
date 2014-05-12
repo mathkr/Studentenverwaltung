@@ -41,6 +41,7 @@ public class Template {
 
 			while((line = reader.readLine()) != null) {
 				sb.append(line);
+				sb.append("\n");
 			}
 
 			fileContents = sb.toString();
@@ -76,7 +77,8 @@ public class Template {
 
 		String appliedString = replace(labels, values, fileContents);
 
-		File tmp = File.createTempFile(templateFile, null);
+		File tmp = File.createTempFile("tmp",
+		    (new File(templateFile)).getName());
 		writeToFile(tmp, appliedString);
 
 		// TODO: check portability (path separators?)
@@ -88,17 +90,20 @@ public class Template {
 	private void callCommand(String inputFile, String outputFile) {
 		String[] labels = {"input", "output"};
 		String[] values = {inputFile, outputFile};
+
 		String command = replace(labels, values, this.command);
 
 		try {
-			Process p = Runtime.getRuntime().exec(command);
+			ProcessBuilder pb = new ProcessBuilder("sh", "-c",
+			    command);
+			pb.inheritIO();
+			Process p = pb.start();
 
 			int exitValue = p.waitFor();
 
 			if (exitValue != 0) {
 				System.err.println("Command '" + command +
-				    "' exited with status: " +
-				    exitValue);
+				    "' exited with status: " + exitValue);
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
