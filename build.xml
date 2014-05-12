@@ -48,6 +48,18 @@
 		</java>
 	</target>
 
+	<target name="runtest">
+		<java classname="stuma.TemplateTest" fork="true">
+			<jvmarg value="-Dactivejdbc.log"/>
+			<classpath>
+				<pathelement location="${classes.dir}"/>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+
 	<target name="document">
 		<javadoc sourcepath="${src.dir}" destdir="${docs.dir}" />
 	</target>
