@@ -19,9 +19,6 @@
 
 package stuma;
 
-import java.awt.event.*;
-import java.awt.*;
-
 public class StumaController implements Subsystem {
 	private static StumaController singleton;
 
@@ -31,14 +28,6 @@ public class StumaController implements Subsystem {
 	private StumaController(StumaModel model, StumaView view) {
 		this.model = model;
 		this.view = view;
-
-		view.frame.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				Main.exit(0);
-			}
-		});
-
 	}
 
 	public static StumaController getStumaController(StumaModel model,

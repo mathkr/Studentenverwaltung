@@ -20,12 +20,13 @@
 package stuma;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 public class StumaView implements Subsystem {
 	private static StumaView singleton;
 
-	public JFrame frame;
+	private JFrame frame;
 	private StumaModel model;
 
 	private StumaView(StumaModel model) {
@@ -43,12 +44,21 @@ public class StumaView implements Subsystem {
 	}
 
 	@Override
-	public void close() {}
+	public void close() {
+		frame.dispose();
+	}
 
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				Main.exit(0);
+			}
+		});
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
