@@ -36,6 +36,7 @@ public class Main {
 
 		subsystems = new ArrayList<Subsystem>();
 		subsystems.add(model);
+		subsystems.add(view);
 		subsystems.add(controller);
 	}
 
