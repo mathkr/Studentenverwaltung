@@ -48,8 +48,8 @@
 		</java>
 	</target>
 
-	<target name="runtest">
-		<java classname="stuma.TemplateTest" fork="true">
+	<target name="testrun">
+		<java classname="polygon.PolygonManager" fork="true">
 			<jvmarg value="-Dactivejdbc.log"/>
 			<classpath>
 				<pathelement location="${classes.dir}"/>
