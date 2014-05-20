@@ -5,8 +5,6 @@
 	<property name="docs.dir"	value="docs" />
 	<property name="lib.dir"	value="lib" />
 
-	<property name="main-class"	value="stuma.Main" />
-
 	<target name="clean">
 		<delete dir="${build.dir}" />
 	</target>
@@ -34,10 +32,8 @@
 		</java>
 	</target>
 
-	<target name="run" depends="build, justrun" />
-
-	<target name="justrun">
-		<java classname="${main-class}" fork="true">
+	<target name="stumarun">
+		<java classname="stuma.Main" fork="true">
 			<jvmarg value="-Dactivejdbc.log"/>
 			<classpath>
 				<pathelement location="${classes.dir}"/>
@@ -48,9 +44,28 @@
 		</java>
 	</target>
 
-	<target name="testrun">
+	<target name="polyrun">
 		<java classname="polygon.PolygonManager" fork="true">
 			<jvmarg value="-Dactivejdbc.log"/>
+			<classpath>
+				<pathelement location="${classes.dir}"/>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+
+
+	<target name="input-args" unless="args">
+		<input message="Command line arguments:" addProperty="args"/>
+	</target>
+
+	<target name="plotterrun" depends="input-args">
+		<echo message="${args}" />
+		<java classname="plotter.Main" fork="true">
+			<jvmarg value="-Dactivejdbc.log"/>
+			<arg line="${args}"/>
 			<classpath>
 				<pathelement location="${classes.dir}"/>
 				<fileset dir="${lib.dir}">
@@ -68,5 +83,5 @@
 		<delete dir="${docs.dir}" />
 	</target>
 
-	<target name="main" depends="run" />
+	<target name="main" depends="build, stumarun" />
 </project>
