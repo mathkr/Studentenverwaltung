@@ -44,9 +44,30 @@
 		</java>
 	</target>
 
+	<target name="vectorrun">
+		<java classname="vector.VectorManager" fork="true">
+			<classpath>
+				<pathelement location="${classes.dir}"/>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+
+	<target name="testrun">
+		<java classname="test.Test" fork="true">
+			<classpath>
+				<pathelement location="${classes.dir}"/>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+
 	<target name="polyrun">
 		<java classname="polygon.PolygonManager" fork="true">
-			<jvmarg value="-Dactivejdbc.log"/>
 			<classpath>
 				<pathelement location="${classes.dir}"/>
 				<fileset dir="${lib.dir}">
@@ -64,7 +85,6 @@
 	<target name="plotterrun" depends="input-args">
 		<echo message="${args}" />
 		<java classname="plotter.Main" fork="true">
-			<jvmarg value="-Dactivejdbc.log"/>
 			<arg line="${args}"/>
 			<classpath>
 				<pathelement location="${classes.dir}"/>
