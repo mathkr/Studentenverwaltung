@@ -22,7 +22,7 @@ package algorithms.structures;
 public class Vector<T> implements SimpleCollection<T> {
 	private static final int DEFAULT_CAPACITY = 10;
 
-	private Object[] elements;
+	protected Object[] elements;
 	private int capacityIncrement;
 	private int size;
 
