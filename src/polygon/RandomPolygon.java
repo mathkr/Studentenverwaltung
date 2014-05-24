@@ -21,6 +21,7 @@ package polygon;
 
 import java.util.List;
 import java.util.ArrayList;
+import util.*;
 
 public class RandomPolygon implements Observable {
 	private List<Double> pointsX;

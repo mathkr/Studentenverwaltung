@@ -17,8 +17,8 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-package polygon;
+package util;
 
-public interface Observable {
-	public void addObserver(Observer observer);
+public interface Observer {
+	public void notifyObserver();
 }

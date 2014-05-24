@@ -21,6 +21,7 @@ package polygon;
 
 import java.awt.*;
 import java.awt.event.*;
+import util.*;
 
 public class PolygonFrame extends Frame implements Observer {
 	private RandomPolygon polygon;
