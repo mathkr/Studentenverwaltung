@@ -19,43 +19,23 @@
 
 package test;
 
+import algorithms.structures.Vector;
+
 class Test {
-	private Integer bar;
-
-	Test() {
-		this.bar = new Integer(5);
-		final Integer baz = new Integer(1);
-
-		B b = new B(new A() {
-			@Override
-			public void foo() {
-				bar = new Integer(baz);
-			}
-		});
-
-		System.out.println(bar);
-
-		b.doIt();
-
-		System.out.println(bar);
-	}
-
 	public static void main (String[] args) {
-		new Test();
-	}
-}
+		Vector<Integer> v = new Vector<Integer>();
+		
+		for (int i = 9; i >= 0; --i) {
+			v.push_front(i);
+		}
 
-class B {
-	private A a;
-	B(A a) {
-		this.a = a;
-	}
+		int size = v.size();
+		for (int i = size; i < size * 2; ++i) {
+			v.push_back(i);
+		}
 
-	public void doIt() {
-		a.foo();
+		for (int i = 0; i < v.size(); ++i) {
+			System.out.println(v.get(i));
+		}
 	}
-}
-
-interface A {
-	public void foo();
 }
