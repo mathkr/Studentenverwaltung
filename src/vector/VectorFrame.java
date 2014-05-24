@@ -58,7 +58,6 @@ public class VectorFrame extends Frame implements Observer {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char key = e.getKeyChar();
-				System.out.println(key);
 				switch(key) {
 					case 'b':
 						vectorManager.push_back();

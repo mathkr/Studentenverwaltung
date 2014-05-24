@@ -40,7 +40,7 @@ public class VectorManager {
 	}
 
 	public void push_front() {
-		vector.push_back(1);
+		vector.push_front(1);
 	}
 
 	public void double_back() {
