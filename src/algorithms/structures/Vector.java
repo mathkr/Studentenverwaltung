@@ -25,16 +25,15 @@ public class Vector<T> implements SimpleCollection<T> {
 	protected Object[] elements;
 	private int capacityIncrement;
 	private int size;
+	private int nextFree;
+	private int head;
 
 	public Vector(int initCapacity, int capacityIncrement) {
-		if (capacityIncrement > 0) {
-			this.capacityIncrement = capacityIncrement;
-		} else {
-			this.capacityIncrement = 0;
-		}
+		this.capacityIncrement = capacityIncrement > 0 ?
+		    capacityIncrement : 0;
 
 		elements = new Object[initCapacity];
-		size = 0;
+		size = head = nextFree = 0;
 	}
 
 	public Vector(int initCapacity) {
@@ -49,20 +48,21 @@ public class Vector<T> implements SimpleCollection<T> {
 		return size;
 	}
 
-	public void push_back(T arg) {
-		add(arg);
+	public void push_front(T arg) {
+		if ((head - 1) < 0) {
+			resize_front();
+		}
+
+		elements[--head] = arg;
+		++size;
 	}
 
-	public void push_front(T arg) {
-		if (size >= elements.length) {
+	public void push_back(T arg) {
+		if (nextFree >= elements.length) {
 			resize();
 		}
 
-		for (int i = size; i > 0; --i) {
-			elements[i] = elements[i - 1];
-		}
-
-		elements[0] = arg;
+		elements[nextFree++] = arg;
 		++size;
 	}
 
@@ -72,18 +72,11 @@ public class Vector<T> implements SimpleCollection<T> {
 			    ", Size: " + size);
 		} else {
 			for (;i < size - 1; ++i) {
-				elements[i] = elements[i + 1];
+				elements[head + i] = elements[head + i + 1];
 			}
-			elements[--size] = null;
+			elements[--nextFree] = null;
+			--size;
 		}
-	}
-
-	public void add(T arg) {
-		if (size >= elements.length) {
-			resize();
-		}
-
-		elements[size++] = arg;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -92,7 +85,7 @@ public class Vector<T> implements SimpleCollection<T> {
 			throw new IndexOutOfBoundsException("Index: " + i +
 			    ", Size: " + size);
 		} else {
-			return (T) elements[i];
+			return (T) elements[head + i];
 		}
 	}
 
@@ -101,7 +94,7 @@ public class Vector<T> implements SimpleCollection<T> {
 			throw new IndexOutOfBoundsException("Index: " + i +
 			    ", Size: " + size);
 		} else {
-			elements[i] = arg;
+			elements[head + i] = arg;
 		}
 	}
 
@@ -114,5 +107,19 @@ public class Vector<T> implements SimpleCollection<T> {
 			newElements[i] = elements[i];
 		}
 		elements = newElements;
+	}
+
+	private void resize_front() {
+		int oldSize = elements.length;
+		int newSize = (capacityIncrement > 0) ?
+		    oldSize + capacityIncrement : 2 * oldSize;
+		Object[] newElements = new Object[newSize];
+
+		for (int i = 0; i < oldSize; ++i) {
+			newElements[(newSize - oldSize) + i] = elements[i];
+		}
+		elements = newElements;
+		head = newSize - oldSize;
+		nextFree = head + size;
 	}
 }
