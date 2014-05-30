@@ -19,7 +19,6 @@
 
 package stuma;
 
-import org.javalite.activejdbc.Base;
 import java.util.List;
 
 public class StumaModel implements Subsystem {
@@ -35,49 +34,15 @@ public class StumaModel implements Subsystem {
 		return singleton;
 	}
 
-	private void initDataBaseConnection() {
-		String driver = Config.database().getProperty("driver");
-		String protocol = Config.database().getProperty("protocol");
-		String host = Config.database().getProperty("host");
-		String database = Config.database().getProperty("database");
-		String user = Config.database().getProperty("user");
-		String pass = Config.database().getProperty("pass");
-
-		StringBuilder con = new StringBuilder();
-		con.append("jdbc:");
-		con.append(protocol);
-		con.append("://");
-		con.append(host);
-		con.append("/");
-		con.append(database);
-
-		Base.open(driver, con.toString(), user, pass);
-	}
-
-	private void disconnect() {
-		Base.close();
-	}
-
 	@Override
 	public void close() {
-		if (Base.hasConnection()) {
-			disconnect();
-		}
 	}
 
 	public List<Student> getStudents() {
-		if (!Base.hasConnection()) {
-			initDataBaseConnection();
-		}
-
-		return Student.findAll();
+		return null;
 	}
 
 	public Student getStudentById(int id) {
-		if (!Base.hasConnection()) {
-			initDataBaseConnection();
-		}
-
-		return Student.findById(id);
+		return null;
 	}
 }

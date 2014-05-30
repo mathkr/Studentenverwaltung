@@ -32,7 +32,7 @@ public class TemplateTest {
 		String[] labels = {"last_name", "first_name", "dob"};
 		String[] values = new String[labels.length];
 		for (int i = 0; i < values.length; ++i) {
-			values[i] = student.get(labels[i]).toString();
+			values[i] = "null";
 		}
 
 		try {

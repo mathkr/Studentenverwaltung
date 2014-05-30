@@ -19,6 +19,7 @@
 
 package stuma;
 
-import org.javalite.activejdbc.Model;
+public class Student {
+	
 
-public class Student extends Model {}
+}

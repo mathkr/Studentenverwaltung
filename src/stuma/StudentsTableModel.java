@@ -27,9 +27,6 @@ public class StudentsTableModel implements TableModel {
 	private static String[] columnNames = {"ID", "Last Name", "First Name",
 	    "Birthday"};
 
-	private static String[] columns = {"id", "last_name", "first_name",
-	    "dob"};
-
 	private List<Student> students;
 
 	StudentsTableModel(List<Student> students) {
@@ -48,7 +45,7 @@ public class StudentsTableModel implements TableModel {
 
 	@Override
 	public int getColumnCount() {
-		return columns.length;
+		return columnNames.length;
 	}
 
 	@Override
@@ -63,7 +60,8 @@ public class StudentsTableModel implements TableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return students.get(rowIndex).get(columns[columnIndex]);
+		// TODO
+		return null;
 	}
 
 	@Override
