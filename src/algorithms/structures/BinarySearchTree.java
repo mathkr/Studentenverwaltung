@@ -129,7 +129,7 @@ public class BinarySearchTree<K extends Comparable<K>, T> {
 	}
 
 	public T delete(K key) {
-		return delete(root, key).value;
+		return root == null ? null : delete(root, key).value;
 	}
 
 	private Node<K, T> delete(Node<K, T> node, K key) {
